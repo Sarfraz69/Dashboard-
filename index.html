@@ -33,9 +33,26 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .stat .v{font-family:var(--mono);font-size:16px;font-weight:bold;}
 .stat .l{font-family:var(--mono);font-size:7px;letter-spacing:2px;color:var(--muted);}
 .hdr-date{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:2px;}
+.free-badge{font-family:var(--mono);font-size:7px;letter-spacing:2px;padding:3px 8px;border:1px solid rgba(0,255,204,0.3);color:var(--accent2);background:rgba(0,255,204,0.05);}
 
 /* MAP */
 #map{position:fixed;top:50px;left:0;right:0;bottom:26px;z-index:1;}
+
+/* MAP LAYER CONTROLS */
+#layerCtrl{
+  position:fixed;top:60px;right:10px;z-index:900;
+  display:flex;flex-direction:column;gap:4px;
+}
+.lc-btn{
+  font-family:var(--mono);font-size:7px;letter-spacing:1px;
+  padding:5px 10px;background:rgba(4,8,20,0.92);
+  border:1px solid var(--border);color:var(--muted);cursor:pointer;
+  transition:all .2s;white-space:nowrap;backdrop-filter:blur(8px);
+  text-align:left;
+}
+.lc-btn:hover{background:rgba(0,100,180,0.25);color:var(--text);}
+.lc-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(0,100,180,0.18);}
+.lc-sep{height:1px;background:var(--border);margin:2px 0;}
 
 /* LIST PANEL */
 #listPanel{
@@ -49,10 +66,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 #hsList{flex:1;overflow-y:auto;padding:6px;}
 #hsList::-webkit-scrollbar{width:2px;}
 #hsList::-webkit-scrollbar-thumb{background:var(--border);}
-.hs{
-  padding:8px 10px;margin-bottom:4px;cursor:pointer;
-  border:1px solid transparent;transition:all .2s;border-radius:1px;
-}
+.hs{padding:8px 10px;margin-bottom:4px;cursor:pointer;border:1px solid transparent;transition:all .2s;border-radius:1px;}
 .hs:hover{background:rgba(0,180,255,0.06);border-color:var(--border);}
 .hs.active{background:rgba(0,180,255,0.1);border-color:rgba(0,180,255,0.3);}
 .hs-name{font-size:12px;font-weight:600;color:#ddeeff;margin-bottom:3px;}
@@ -64,7 +78,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 
 /* DETAIL PANEL */
 #detPanel{
-  position:fixed;top:50px;right:0;bottom:26px;width:370px;z-index:600;
+  position:fixed;top:50px;right:0;bottom:26px;width:380px;z-index:600;
   background:var(--panel);border-left:1px solid var(--border);
   display:flex;flex-direction:column;backdrop-filter:blur(12px);
   transform:translateX(100%);transition:transform .3s ease;
@@ -72,7 +86,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 #detPanel.open{transform:translateX(0);}
 #detHdr{padding:12px 14px 10px;border-bottom:1px solid var(--border);flex-shrink:0;position:relative;}
 #detRegion{font-family:var(--mono);font-size:8px;letter-spacing:3px;color:var(--accent);margin-bottom:2px;}
-#detName{font-size:19px;font-weight:700;color:#fff;letter-spacing:0.5px;padding-right:60px;line-height:1.2;}
+#detName{font-size:19px;font-weight:700;color:#fff;letter-spacing:0.5px;padding-right:70px;line-height:1.2;}
 #closeBtn{
   position:absolute;top:12px;right:12px;background:none;
   border:1px solid var(--border);color:var(--muted);font-family:var(--mono);
@@ -113,7 +127,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .wbox{padding:9px 12px;background:rgba(255,60,60,0.05);border-left:3px solid var(--red);margin-bottom:10px;font-size:12px;line-height:1.65;color:#e0a0a0;}
 .tl{margin-bottom:10px;}
 .tl-item{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;}
-.tl-date{font-family:var(--mono);font-size:8px;color:var(--accent);white-space:nowrap;padding-top:2px;min-width:56px;}
+.tl-date{font-family:var(--mono);font-size:8px;color:var(--accent);white-space:nowrap;padding-top:2px;min-width:60px;}
 .tl-col{display:flex;flex-direction:column;align-items:center;padding-top:3px;}
 .tl-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;}
 .tl-trail{width:1px;flex:1;background:var(--border);min-height:16px;margin-top:2px;}
@@ -123,13 +137,20 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .outlook-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
 .ol-lbl{font-family:var(--mono);font-size:8px;letter-spacing:3px;color:var(--accent);}
 .ol-val{font-size:14px;font-weight:600;letter-spacing:1px;}
+.src-box{margin-top:10px;padding:8px 10px;background:rgba(0,255,204,0.04);border:1px solid rgba(0,255,204,0.15);}
+.src-t{font-family:var(--mono);font-size:7px;letter-spacing:3px;color:var(--accent2);margin-bottom:6px;}
+.src-links{display:flex;flex-wrap:wrap;gap:5px;}
+.src-a{font-family:var(--mono);font-size:8px;color:#60aaff;text-decoration:none;border:1px solid rgba(0,180,255,0.2);padding:2px 7px;transition:background .15s;}
+.src-a:hover{background:rgba(0,100,200,0.2);}
 
-/* LOADING */
-#loadState{padding:24px 0;text-align:center;}
-.spin{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;margin:0 auto 10px;animation:spin .8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.ld-t{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--accent);animation:blink 1s infinite;}
-.ld-s{font-family:var(--mono);font-size:8px;color:var(--muted);margin-top:6px;letter-spacing:1px;}
+/* FOOTER */
+#ftr{
+  position:fixed;bottom:0;left:0;right:0;z-index:1200;height:26px;
+  background:rgba(4,8,16,0.98);border-top:1px solid var(--border);
+  display:flex;align-items:center;padding:0 14px;gap:20px;
+}
+.ft{font-family:var(--mono);font-size:7px;letter-spacing:2px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.ft-dot{width:4px;height:4px;border-radius:50%;}
 
 /* LEAFLET */
 .leaflet-container{background:#040810!important;}
@@ -148,15 +169,10 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
   color:var(--accent);cursor:pointer;width:100%;text-align:center;
 }
 .pu-btn:hover{background:rgba(0,100,200,0.28);}
-
-/* FOOTER */
-#ftr{
-  position:fixed;bottom:0;left:0;right:0;z-index:1200;height:26px;
-  background:rgba(4,8,16,0.98);border-top:1px solid var(--border);
-  display:flex;align-items:center;padding:0 14px;gap:20px;
-}
-.ft{font-family:var(--mono);font-size:7px;letter-spacing:2px;color:var(--muted);display:flex;align-items:center;gap:5px;}
-.ft-dot{width:4px;height:4px;border-radius:50%;}
+.leaflet-control-zoom a{background:rgba(4,8,20,0.9)!important;color:#80aaff!important;border-color:rgba(0,180,255,0.2)!important;}
+.leaflet-control-zoom a:hover{background:rgba(0,50,120,0.9)!important;}
+.leaflet-control-attribution{font-size:6px!important;background:rgba(4,8,20,0.7)!important;color:#444!important;}
+.leaflet-control-attribution a{color:#446699!important;}
 </style>
 </head>
 <body>
@@ -165,19 +181,36 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
   <div class="hdr-brand">
     <div class="live-dot"></div>
     <div class="brand-text">
-      <div class="tag">CLASSIFIED // GEOINT LIVE</div>
+      <div class="tag">OPEN SOURCE // GEOINT</div>
       <div class="title">GLOBAL TENSION MONITOR</div>
     </div>
   </div>
   <div class="hdr-stats">
-    <div class="stat"><div class="v" style="color:var(--red)" id="sCrit">3</div><div class="l">CRITICAL</div></div>
-    <div class="stat"><div class="v" style="color:var(--orange)" id="sSev">4</div><div class="l">SEVERE</div></div>
+    <div class="stat"><div class="v" style="color:var(--red)" id="sCrit">0</div><div class="l">CRITICAL</div></div>
+    <div class="stat"><div class="v" style="color:var(--orange)" id="sSev">0</div><div class="l">SEVERE</div></div>
     <div class="stat"><div class="v" style="color:var(--yellow)">10</div><div class="l">TOTAL</div></div>
   </div>
-  <div class="hdr-date" id="hdrDate">—</div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="free-badge">✓ NO API KEY · FREE DATA</div>
+    <div class="hdr-date" id="hdrDate">—</div>
+  </div>
 </div>
 
 <div id="map"></div>
+
+<!-- MAP LAYER CONTROLS -->
+<div id="layerCtrl">
+  <div style="font-family:var(--mono);font-size:6px;letter-spacing:3px;color:var(--muted);padding:2px 4px;">BASEMAP</div>
+  <button class="lc-btn" id="btn-dark">🌑 DARK</button>
+  <button class="lc-btn" id="btn-osm">🗺 OSM STREETS</button>
+  <button class="lc-btn" id="btn-sat">🛰 SATELLITE</button>
+  <button class="lc-btn" id="btn-topo">⛰ TOPO</button>
+  <div class="lc-sep"></div>
+  <div style="font-family:var(--mono);font-size:6px;letter-spacing:3px;color:var(--muted);padding:2px 4px;">OVERLAYS</div>
+  <button class="lc-btn" id="btn-pop">👥 POPULATION</button>
+  <button class="lc-btn" id="btn-heat">🔴 TENSION HEAT</button>
+  <button class="lc-btn" id="btn-labels">🏷 LABELS</button>
+</div>
 
 <div id="listPanel">
   <div class="lp-hdr">
@@ -194,11 +227,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <button id="closeBtn" onclick="closePanel()">✕ CLOSE</button>
   </div>
   <div id="detBody">
-    <div id="loadState">
-      <div class="spin"></div>
-      <div class="ld-t">FETCHING LIVE INTEL...</div>
-      <div class="ld-s" id="loadStep">Connecting to AI analyst...</div>
-    </div>
     <div id="intelWrap" style="display:none">
       <div class="tmeter" id="tmeter">
         <div class="tm-hd">TENSION INDEX</div>
@@ -227,99 +255,389 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 </div>
 
 <div id="ftr">
-  <div class="ft"><div class="ft-dot" style="background:var(--accent2)"></div>LIVE AI INTELLIGENCE</div>
-  <div class="ft"><div class="ft-dot" style="background:var(--accent)"></div>OPENSTREETMAP BASEMAP</div>
+  <div class="ft"><div class="ft-dot" style="background:var(--accent2)"></div>OPEN SOURCE INTELLIGENCE</div>
+  <div class="ft"><div class="ft-dot" style="background:var(--accent)"></div>OSM · ESRI SATELLITE · TOPO</div>
   <div class="ft"><div class="ft-dot" style="background:var(--yellow)"></div>10 ZONES MONITORED</div>
   <div class="ft" style="margin-left:auto"><span id="ftrTime">—</span></div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// ═══════════════ DATA ═══════════════
+// ═══════════════════════════════════════════════════════════════════
+// DATA — all intel embedded, zero API calls needed
+// ═══════════════════════════════════════════════════════════════════
 const HOTSPOTS = [
   {
-    id:"ukraine",name:"Russia–Ukraine War",region:"Eastern Europe",
-    lat:49.0,lon:31.5,tension:95,color:"#ff3a3a",
+    id:"ukraine", name:"Russia–Ukraine War", region:"Eastern Europe",
+    lat:49.0, lon:31.5, tension:95, color:"#ff3a3a",
     parties:[{n:"Russia",m:1},{n:"Ukraine",m:1},{n:"NATO",m:1},{n:"USA",m:0},{n:"EU",m:0},{n:"Belarus",m:0}],
-    q:`You are a senior geopolitical analyst with access to current 2025-2026 intelligence. Provide a COMPREHENSIVE, DETAILED intelligence report on the Russia-Ukraine War.
-Return ONLY valid JSON, no markdown, no backticks, exactly this structure:
-{"summary":"3-4 sentence executive summary of the current state as of early 2026","history":"DETAILED history in 4-5 paragraphs covering: Ukraine independence 1991 and Budapest Memorandum, 2014 Euromaidan and Crimea annexation, Donbas conflict, February 2022 full-scale invasion, Western response and aid","current":"DETAILED 4-5 paragraph current situation: frontlines, recent offensives, Western military aid packages, sanctions, casualty estimates, drone warfare, peace negotiation attempts 2025","why":"2-3 paragraphs on ROOT CAUSES: NATO expansion, Russian strategic interests, Ukrainian identity, energy politics, historical claims","outlook":"Escalating","timeline":[{"date":"1991","event":"Ukraine declares independence; receives nuclear arsenal"},{"date":"1994","event":"Budapest Memorandum: Ukraine surrenders nuclear weapons for security guarantees"},{"date":"2014","event":"Euromaidan revolution; Russia annexes Crimea; Donbas war begins"},{"date":"Feb 2022","event":"Russia launches full-scale invasion — largest European war since WWII"},{"date":"Sep 2022","event":"Ukraine liberates Kharkiv and Kherson regions"},{"date":"2023","event":"Ukrainian summer counteroffensive yields limited gains; frontlines stabilize"},{"date":"2024","event":"Russia advances in Donetsk; North Korean troops deployed alongside Russia"},{"date":"2025-26","event":"Ceasefire talks begin; frontlines largely frozen; war of attrition continues"}],"keyFacts":["Estimated 700,000+ total casualties (killed and wounded) on both sides","Ukraine has received over $250 billion in combined Western military and economic aid","Russia controls approximately 20% of Ukrainian territory","Over 6 million Ukrainians displaced across Europe as refugees","Russia faces 16,000+ Western sanctions — most sanctioned nation in history","Both sides conduct hundreds of drone strikes monthly on infrastructure","Ukraine's GDP partially recovered after 30%+ collapse in 2022","Nuclear threats raised global alert levels multiple times since 2022","North Korea supplied millions of artillery shells and troops to Russia","Zelensky's term legally expired but he continues governing under martial law"]}`
+    sources:[
+      {l:"Wikipedia",u:"https://en.wikipedia.org/wiki/2022_Russian_invasion_of_Ukraine"},
+      {l:"ACLED Ukraine",u:"https://acleddata.com/ukraine-crisis/"},
+      {l:"UN OCHA",u:"https://www.unocha.org/ukraine"},
+      {l:"ReliefWeb",u:"https://reliefweb.int/country/ukr"},
+    ],
+    summary:"Russia's full-scale invasion of Ukraine continues into its fourth year with front lines largely stabilized across eastern Ukraine. Russian forces hold approximately 20% of Ukrainian territory. US-brokered ceasefire diplomacy intensified in early 2026 but Moscow demands are at odds with Kyiv's red lines. The war remains the largest conventional conflict in Europe since WWII.",
+    history:"Ukraine declared independence in 1991 after the Soviet collapse, receiving the world's third-largest nuclear arsenal which it surrendered under the 1994 Budapest Memorandum in exchange for security guarantees from Russia, the US, and UK — guarantees Russia subsequently violated.\n\nThe 2014 Euromaidan revolution ousted pro-Russian president Yanukovych, prompting Russia to annex Crimea and back separatist forces in eastern Ukraine's Donbas. An estimated 14,000 people died in the subsequent eight years of low-level conflict, with two Minsk ceasefire agreements repeatedly violated.\n\nOn 24 February 2022, Russia launched a full-scale invasion across multiple fronts — the largest ground offensive in Europe since WWII. Initial Russian attempts to take Kyiv failed. Ukraine subsequently liberated Kharkiv (Sep 2022) and Kherson (Nov 2022). Russia formally annexed four Ukrainian oblasts despite not fully controlling them.\n\nThe 2023 Ukrainian counteroffensive made limited gains against prepared Russian defenses. By 2024 Russia had momentum in Donetsk, capturing Avdiivka. Ukraine escalated by striking deep inside Russia including a ground incursion into Kursk oblast. North Korean troops were deployed alongside Russian forces from late 2024.",
+    current:"As of early 2026, front lines have largely stabilized across a 1,000+ km contact line in eastern and southern Ukraine. Russia holds Donetsk, Luhansk, Zaporizhzhia and Kherson oblasts partially. Fighting is most intense around Pokrovsk and in the Zaporizhzhia direction.\n\nThe Trump administration entered office in January 2025 pledging to end the war quickly. Special Envoy Keith Kellogg has shuttled between Kyiv and Moscow. A preliminary framework involves a ceasefire along current lines, a US-Ukraine minerals deal worth an estimated $500 billion, and a future NATO membership decision deferred. Ukraine insists on security guarantees; Russia demands legal recognition of territorial gains and a ban on Ukrainian NATO membership.\n\nEuropean allies have ramped up their own military aid commitments following uncertainty about continued US support. UK-France-led coalition building continues. Ukraine continues drone warfare deep into Russia — striking oil facilities, airfields, and industrial targets.\n\nWestern sanctions remain in place though enforcement has frayed. Russia's economy has adapted with parallel trade routes via UAE, Turkey, and China. Military casualties on both sides exceed 700,000 combined.",
+    why:"The conflict stems from Russia's strategic rejection of NATO's eastward expansion, which Moscow views as an existential threat given historical invasion routes through Ukraine. Putin has repeatedly cited the failure to implement Minsk agreements and the 'nazification' of Ukraine as justifications — claims rejected by the West as pretexts for imperial expansion.\n\nUkrainian national identity has crystallized in opposition to Russian pressure, with the 2014 revolution representing a choice between European integration and Russian sphere of influence. The Budapest Memorandum failure has also reshaped nuclear nonproliferation calculations globally.",
+    outlook:"Stalemate",
+    timeline:[
+      {date:"1991", event:"Ukraine declares independence; inherits world's third-largest nuclear arsenal"},
+      {date:"1994", event:"Budapest Memorandum: Ukraine surrenders nukes for security guarantees from Russia, US, UK"},
+      {date:"2014", event:"Euromaidan revolution; Russia annexes Crimea; Donbas war begins (~14,000 killed)"},
+      {date:"Feb 2022", event:"Russia launches full-scale invasion — largest European war since WWII"},
+      {date:"Sep 2022", event:"Ukraine liberates Kharkiv and Kherson in major counteroffensives"},
+      {date:"2023", event:"Ukrainian summer counteroffensive yields limited gains; frontlines stabilize"},
+      {date:"2024", event:"Russia advances in Donetsk; North Korean troops deployed alongside Russia; Ukraine strikes Kursk"},
+      {date:"2025–26", event:"Ceasefire diplomacy under Trump; US-Ukraine minerals deal negotiated; front largely frozen"},
+    ],
+    keyFacts:[
+      "Estimated 700,000+ total casualties (killed and wounded) on both sides — most in any conflict since Korean War",
+      "Ukraine has received over $250 billion in combined Western military and economic aid",
+      "Russia controls approximately 20% of Ukrainian territory including Crimea and four annexed oblasts",
+      "Over 6 million Ukrainians displaced across Europe — largest refugee crisis since WWII",
+      "Russia faces 16,000+ Western sanctions — most sanctioned nation in history",
+      "North Korea deployed 10,000+ troops to fight alongside Russian forces in late 2024",
+      "Both sides conduct hundreds of drone strikes monthly deep into each other's territory",
+      "Ukraine's Kursk incursion Aug 2024 — first foreign occupation of Russian soil since WWII",
+      "US-Ukraine critical minerals deal framework agreed — estimated $500 billion in rare earths",
+      "Sweden and Finland joined NATO in 2023–24, fundamentally reshaping European security",
+    ]
   },
   {
-    id:"middleeast",name:"Middle East — Gaza & Regional War",region:"Middle East",
-    lat:31.5,lon:35.0,tension:90,color:"#ff3a3a",
+    id:"middleeast", name:"Middle East — Gaza & Regional War", region:"Middle East",
+    lat:31.5, lon:35.0, tension:90, color:"#ff3a3a",
     parties:[{n:"Israel",m:1},{n:"Hamas",m:1},{n:"Iran",m:1},{n:"Hezbollah",m:0},{n:"USA",m:0},{n:"Palestinians",m:1},{n:"Houthis",m:0}],
-    q:`Senior geopolitical analyst, 2025-2026 intelligence. Comprehensive report on Middle East Conflict — Gaza War and regional escalation.
-Return ONLY valid JSON, no markdown:
-{"summary":"3-4 sentence executive summary of Gaza war and regional dimension as of early 2026","history":"5-6 paragraphs: 1948 Nakba, 1967 occupation, Oslo Accords, 2005 Gaza disengagement, Hamas 2006 election, Gaza blockade, four previous Gaza wars 2008-2021, Abraham Accords, Iran-Israel shadow war context","current":"4-5 paragraphs: October 7 2023 Hamas attack and Israeli response, Gaza humanitarian catastrophe, Lebanese front and Hezbollah, Houthi Red Sea attacks, direct Iran-Israel exchanges 2024, hostage deal negotiations, ICJ case, 2025 ceasefire phases","why":"ROOT CAUSES: Palestinian statehood denial, settlement expansion, Hamas ideology, Iran proxy strategy, US-Israel relationship, Jerusalem religious significance, Arab normalization bypassing Palestinians","outlook":"Escalating","timeline":[{"date":"1948","event":"Israel founded; 700,000 Palestinians displaced in Nakba; first Arab-Israeli war"},{"date":"1967","event":"Six-Day War — Israel occupies Gaza, West Bank, Sinai, Golan Heights"},{"date":"1993","event":"Oslo Accords — PLO recognizes Israel; Palestinian Authority created"},{"date":"2006","event":"Hamas wins Palestinian elections; blockade of Gaza imposed"},{"date":"Oct 7 2023","event":"Hamas attacks Israel — 1,200 killed, 250 taken hostage — deadliest day for Jews since Holocaust"},{"date":"2024","event":"Iran launches 300+ drones and missiles directly at Israel — first direct attack in history"},{"date":"2024","event":"Israeli campaign in Lebanon; Hezbollah leadership decapitated"},{"date":"2025","event":"Ceasefire phases negotiated; Gaza largely destroyed; over 47,000 Palestinian deaths reported"}],"keyFacts":["October 7 attack: 1,200 Israelis killed; 250 taken hostage","Gaza death toll exceeded 47,000 by early 2026, majority civilian","Over 1.9 million Gazans (85% of population) displaced internally","Gaza healthcare system largely destroyed — 34+ of 36 hospitals damaged","Houthis attacked 100+ commercial ships disrupting Red Sea trade routes","US provided $18+ billion in emergency military aid to Israel post-Oct 7","ICJ ordered Israel to prevent genocide acts; Israel and US dispute ruling","West Bank settler violence increased 400% following Oct 7","Hamas October 7 attack was largest intelligence failure in Israeli history","Two-state solution widely considered dead after events of 2023-2025"]}`
+    sources:[
+      {l:"Wikipedia",u:"https://en.wikipedia.org/wiki/2023_Israel%E2%80%93Hamas_war"},
+      {l:"UN OCHA oPt",u:"https://www.unocha.org/occupied-palestinian-territory"},
+      {l:"ACLED Monitor",u:"https://acleddata.com/israel-palestine-monitor/"},
+      {l:"ReliefWeb",u:"https://reliefweb.int/country/opt"},
+    ],
+    summary:"The Gaza conflict has killed over 47,000 Palestinians and created the worst humanitarian crisis in Gaza's history. Ceasefire phases in early 2025 paused some fighting, but Israeli operations continue. The regional dimension — direct Iran-Israel exchanges, Hezbollah war in Lebanon, Houthi Red Sea attacks — has transformed this from a bilateral conflict into a potential regional war.",
+    history:"The Israel-Palestine conflict spans over a century, rooted in competing national movements. The 1948 founding of Israel was accompanied by the displacement of ~700,000 Palestinians (the Nakba). The 1967 Six-Day War placed Gaza, the West Bank, Sinai, and Golan under Israeli military occupation.\n\nOslo Accords (1993) created the Palestinian Authority with limited self-rule in parts of the West Bank and Gaza. Israel's 2005 unilateral withdrawal from Gaza was followed by Hamas winning the 2006 Palestinian elections. A Hamas-Fatah civil war in 2007 gave Hamas full control of Gaza, prompting Israel and Egypt to impose a blockade.\n\nFour major conflicts between Israel and Hamas (2008, 2012, 2014, 2021) killed thousands but ended in ceasefires. The Abraham Accords (2020) normalized Israel-Arab state relations, bypassing Palestinians and likely emboldening Hamas to escalate.\n\nOctober 7, 2023: Hamas launched the largest attack on Israel since the 1948 war — killing ~1,200 people (mostly civilians) and taking ~250 hostages. It was the deadliest day for Jews since the Holocaust. Israel's military response launched a ground invasion of Gaza that has killed over 47,000 Palestinians, displaced 90% of the population, and caused widespread infrastructure destruction.",
+    current:"As of early 2026, ceasefire phases have allowed partial hostage releases and aid delivery, but Israeli military operations in Rafah and northern Gaza continue. Reconstruction is blocked by ongoing fighting and political disputes over Gaza's future governance. The UN and multiple countries have invoked genocide proceedings at the ICJ.\n\nThe regional dimension has fundamentally changed the conflict's stakes. Iran launched 300+ drones and missiles directly at Israel in April 2024 — first direct attack in history. Israel responded with strikes inside Iran. Hezbollah opened a second front from Lebanon; Israeli airstrikes killed Hezbollah leader Nasrallah and much of its leadership in September 2024, followed by a ground invasion. A fragile ceasefire in Lebanon has seen periodic violations.\n\nYemen's Houthis have attacked 100+ commercial vessels in the Red Sea since October 2023, disrupting global shipping. US and UK military strikes on Houthi infrastructure have not stopped attacks. Trade rerouting around Africa has added billions in shipping costs.",
+    why:"The conflict's root causes include the unresolved Palestinian statehood question, continued Israeli settlement expansion in the West Bank (over 700,000 settlers), Gaza's blockade creating desperate conditions that Hamas exploited, Iran's strategic interest in maintaining pressure on Israel through proxy forces, and the failure of international diplomacy to advance a two-state solution.\n\nFor Hamas, the October 7 attack was intended to derail Saudi-Israeli normalization, demonstrate Palestinian cause to the world, and trigger an Israeli response that would inflame Arab opinion. The scale of Gaza's destruction has succeeded in the latter while failing to achieve Palestinian statehood.",
+    outlook:"Escalating",
+    timeline:[
+      {date:"1948", event:"Israel founded; 700,000 Palestinians displaced in Nakba; first Arab-Israeli war"},
+      {date:"1967", event:"Six-Day War — Israel occupies Gaza, West Bank, Sinai, Golan Heights"},
+      {date:"1993", event:"Oslo Accords — PLO recognizes Israel; Palestinian Authority created"},
+      {date:"2005", event:"Israel unilaterally withdraws settlers from Gaza"},
+      {date:"2007", event:"Hamas seizes Gaza; Israeli-Egyptian blockade begins"},
+      {date:"Oct 7, 2023", event:"Hamas attacks Israel — 1,200 killed, 250 taken hostage — deadliest day for Jews since Holocaust"},
+      {date:"2024", event:"Iran launches 300+ drones/missiles directly at Israel; Hezbollah war in Lebanon; Nasrallah killed"},
+      {date:"2025", event:"Ceasefire phases negotiated; Gaza largely destroyed; 47,000+ Palestinian deaths; ICJ case ongoing"},
+    ],
+    keyFacts:[
+      "October 7 attack: ~1,200 Israelis killed; ~250 taken hostage — largest intelligence failure in Israeli history",
+      "Gaza death toll exceeded 47,000 by early 2026 — majority civilian, per Gaza Health Ministry",
+      "Over 1.9 million Gazans (85% of population) displaced internally — most have been displaced multiple times",
+      "Gaza healthcare system largely destroyed — 34+ of 36 hospitals damaged or destroyed",
+      "Iran launched direct missile/drone attacks on Israel for first time in history (April and October 2024)",
+      "Houthis attacked 100+ commercial ships, disrupting Red Sea trade route worth trillions annually",
+      "US provided $18+ billion in emergency military aid to Israel post-Oct 7",
+      "ICJ ordered Israel to prevent genocide acts; South Africa's case continues",
+      "West Bank settler violence increased dramatically following Oct 7",
+      "Two-state solution widely considered non-viable after events of 2023-2025",
+    ]
   },
   {
-    id:"taiwan",name:"Taiwan Strait Crisis",region:"East Asia",
-    lat:23.5,lon:121.0,tension:82,color:"#ff7b00",
-    parties:[{n:"China (PRC)",m:1},{n:"Taiwan (ROC)",m:1},{n:"USA",m:1},{n:"Japan",m:0},{n:"Philippines",m:0}],
-    q:`Senior geopolitical analyst, 2025-2026. Comprehensive intelligence report on the Taiwan Strait Crisis.
-Return ONLY valid JSON, no markdown:
-{"summary":"3-4 sentence executive summary","history":"5-6 paragraphs: Chinese Civil War 1949, ROC retreat to Taiwan, Korean War US 7th Fleet, Nixon rapprochement 1972, Taiwan Relations Act 1979, Third Strait Crisis 1996, DPP victories and rising tensions, TSMC semiconductor importance","current":"4-5 paragraphs: PLA military exercises, US arms sales acceleration, semiconductor dominance (TSMC 2nm), Taiwan's defenses, US strategic ambiguity debates, gray-zone operations 2024-2025, Philippines as flashpoint","why":"ROOT CAUSES: One China principle, CCP legitimacy and unification nationalism, semiconductor strategic importance, US-China great power competition, Taiwan's democratic identity and separate governance","outlook":"Escalating","timeline":[{"date":"1949","event":"PRC established; ROC retreats to Taiwan after Communist victory in civil war"},{"date":"1979","event":"US breaks formal ties; Taiwan Relations Act ensures de facto defense commitment"},{"date":"1996","event":"Third Taiwan Strait Crisis — PLA missile tests; US deploys two carrier groups"},{"date":"2022","event":"Pelosi Taiwan visit triggers largest PLA exercises ever around Taiwan"},{"date":"2024","event":"Lai Ching-te elected president; China launches Joint Sword-2024B exercises"},{"date":"2025","event":"PLA increases ADIZ incursions to record levels; US-Taiwan arms deals accelerate"}],"keyFacts":["Taiwan produces 90%+ of the world's most advanced semiconductors (TSMC)","China has 2,000+ ballistic missiles aimed at Taiwan across the strait","US has sold Taiwan over $20 billion in weapons since 2017","Only 12 UN member states formally recognize Taiwan diplomatically","Taiwan Strait handles 50%+ of global container ship traffic daily","PLA flew record sorties into Taiwan's ADIZ in 2024","China's military budget has grown 7%+ annually for 30 consecutive years","US 'strategic ambiguity' policy deliberately unclear on defending Taiwan","Taiwan conflict could cost global economy $10 trillion+ (Bloomberg estimate)","A conflict would cut off 90% of advanced chip supply — catastrophic for global tech"]}`
+    id:"taiwan", name:"Taiwan Strait Crisis", region:"East Asia",
+    lat:23.5, lon:121.0, tension:82, color:"#ff7b00",
+    parties:[{n:"China (PRC)",m:1},{n:"Taiwan",m:1},{n:"USA",m:1},{n:"Japan",m:1},{n:"Philippines",m:0}],
+    sources:[
+      {l:"Wikipedia",u:"https://en.wikipedia.org/wiki/Taiwan_Strait_crises"},
+      {l:"CSIS Taiwan",u:"https://www.csis.org/programs/china-power-project/taiwan-strait-weekly"},
+      {l:"USNI News",u:"https://news.usni.org/"},
+    ],
+    summary:"Cross-strait tensions remain at a multi-decade high following Taiwan's 2024 election of pro-Taiwan identity President Lai Ching-te. China has conducted multiple rounds of military encirclement exercises. The US has accelerated arms sales and strengthened alliances with Japan and Philippines. Taiwan produces ~90% of the world's most advanced semiconductors, making a conflict here potentially the most economically destructive in history.",
+    history:"Taiwan's separation from mainland China stems from the 1949 Chinese Civil War, when the Nationalist KMT government fled to Taiwan as the Communists took the mainland. The PRC has never controlled Taiwan, which has developed into a vibrant democracy of 23 million people.\n\nThe US maintained formal relations with the Republic of China (Taiwan) until 1979 when it switched recognition to the PRC, while passing the Taiwan Relations Act to maintain de facto ties and arms sales. The US policy of 'strategic ambiguity' deliberately leaves unclear whether the US would militarily defend Taiwan.\n\nThree Taiwan Strait crises (1954–55, 1958, 1996) tested the relationship. The 1996 crisis, in which China fired missiles near Taiwan before elections, prompted the US to deploy two carrier groups — the last direct US-China military confrontation over Taiwan.\n\nTaiwan's democratic consolidation and the rise of a distinct Taiwanese identity (most now identify as Taiwanese, not Chinese) have complicated reunification prospects. China's 2005 Anti-Secession Law authorized force if peaceful reunification becomes impossible.",
+    current:"President Lai Ching-te (inaugurated May 2024) has maintained Taiwan's democratic self-governance while avoiding formal declarations of independence. China responded to his election by conducting Joint Sword-2024A and 2024B military exercises encircling Taiwan with unprecedented scale.\n\nThe US has responded by accelerating weapons deliveries ($20+ billion since 2017), establishing a new training program for Taiwan troops, and strengthening the alliance architecture — Japan revised its national security strategy to explicitly include Taiwan, and the Philippines has granted US access to additional bases facing Taiwan.\n\nTSMC (Taiwan Semiconductor) is at the center of strategic calculations. It produces ~90% of the world's most advanced chips (<3nm). Its Arizona fab opened Phase 1 in 2024. The US CHIPS Act has accelerated semiconductor reshoring, but Taiwan will remain dominant in advanced chips through the decade.\n\nMost analysts assess the highest invasion risk window as 2027–2030, when China's military modernization plan was designed to be complete. PLA exercises have rehearsed a full blockade and amphibious assault scenario.",
+    why:"The PRC considers Taiwan an inalienable part of China and has never renounced force. Taiwan's growing democratic identity makes peaceful reunification less likely over time. Taiwan's semiconductor dominance adds enormous economic stakes — disruption of TSMC would cost the global economy an estimated $2–3 trillion. For the US, Taiwan's loss would fundamentally undermine the US alliance system in Asia.",
+    outlook:"Escalating",
+    timeline:[
+      {date:"1949", event:"KMT retreats to Taiwan after civil war; PRC founded on mainland"},
+      {date:"1979", event:"US switches recognition to PRC; Taiwan Relations Act maintains de facto ties"},
+      {date:"1996", event:"Third Strait Crisis: China fires missiles near Taiwan; US deploys two carrier groups"},
+      {date:"2005", event:"China's Anti-Secession Law authorizes force if peaceful reunification impossible"},
+      {date:"2022", event:"Pelosi's Taiwan visit triggers largest PLA exercises around Taiwan to date"},
+      {date:"2024", event:"Lai Ching-te elected president; China runs Joint Sword-2024A and 2024B exercises"},
+      {date:"2024", event:"TSMC Arizona fab Phase 1 opens; Japan revises security strategy to include Taiwan"},
+      {date:"2025–26", event:"PLA maintains elevated pressure; US arms sales accelerate; alliance strengthening continues"},
+    ],
+    keyFacts:[
+      "Taiwan produces ~90% of world's most advanced semiconductors (TSMC) — disruption = $2–3 trillion global shock",
+      "PRC has never controlled Taiwan — separated since 1949 civil war",
+      "China has conducted 4 major military encirclement exercises since Pelosi visit 2022",
+      "US has sold Taiwan $20+ billion in weapons systems since 2017",
+      "Most analysts assess highest invasion risk in 2027–2030 window (PLA modernization target)",
+      "Japan now explicitly includes Taiwan in its security strategy for first time",
+      "Philippines granted US access to 4 additional military bases near Taiwan Strait",
+      "PLA Air Force and Navy have set multiple operational records in Taiwan Strait incursions",
+      "Taiwan has ~170,000 active military + 2.3 million reservists",
+      "A Taiwan blockade alone could cut off 90% of advanced chip production globally",
+    ]
   },
   {
-    id:"iran",name:"Iran — Nuclear & Regional Power",region:"Middle East",
-    lat:32.0,lon:53.0,tension:80,color:"#ff7b00",
+    id:"iran", name:"Iran — Nuclear & Regional Power", region:"Middle East",
+    lat:32.0, lon:53.0, tension:80, color:"#ff7b00",
     parties:[{n:"Iran",m:1},{n:"USA",m:1},{n:"Israel",m:1},{n:"Saudi Arabia",m:0},{n:"EU",m:0},{n:"IAEA",m:0}],
-    q:`Senior geopolitical analyst, 2025-2026. Comprehensive intelligence report on Iran Nuclear Crisis and Regional Power.
-Return ONLY valid JSON, no markdown:
-{"summary":"3-4 sentence executive summary of Iran nuclear status and regional role as of early 2026","history":"5-6 paragraphs: 1953 CIA coup legacy, 1979 Islamic Revolution, Iran-Iraq war, nuclear program origins, 2003 enrichment revealed, 2015 JCPOA, Trump 2018 withdrawal, maximum pressure campaign, Iranian acceleration","current":"4-5 paragraphs: Iran enriching to 60%, IAEA access restrictions, Israeli covert operations, Iran's axis of resistance network, direct Iran-Israel strikes 2024, diplomatic channels through Oman, internal unrest, Russia-Iran drone cooperation","why":"ROOT CAUSES: Revolutionary ideology, regime survival through deterrence, US regime change history (1953 coup), Israeli undeclared nuclear arsenal, Sunni Arab hostility, sanctions economic warfare, regional hegemony ambitions","outlook":"Escalating","timeline":[{"date":"1953","event":"CIA-backed coup overthrows PM Mossadegh — Iran's foundational grievance against the West"},{"date":"1979","event":"Islamic Revolution; Shah ousted; US hostage crisis begins"},{"date":"2015","event":"JCPOA signed — Iran limits enrichment; sanctions partially eased"},{"date":"2018","event":"Trump withdraws from JCPOA; maximum pressure sanctions reimposed"},{"date":"2020","event":"US kills General Qasem Soleimani; Iran vows revenge; retaliatory attacks begin"},{"date":"Apr 2024","event":"Iran launches 300+ drones and missiles at Israel — first direct attack in history"},{"date":"2025-26","event":"Iran at 60% enrichment; talks resumed then stalled; Israeli strike threat constant"}],"keyFacts":["Iran enriching uranium to 60% — weapons-grade threshold is 90%","Iran could produce fissile material for one bomb in an estimated 1-2 weeks","Proxy network spans Lebanon (Hezbollah), Yemen (Houthis), Iraq (PMF), Gaza (Hamas)","Israel has assassinated multiple top Iranian nuclear scientists since 2010","Iran has largest ballistic missile arsenal in Middle East — 3,000+ missiles","Hezbollah has 150,000+ rockets aimed at Israel — funded and armed by Iran","IAEA denied access to key nuclear sites since 2021","Iran-Russia cooperation: Iran supplying drones used against Ukraine","US has maintained sanctions on Iran since 1979 — longest sanctions regime in history","Saudi Arabia-Iran normalization deal brokered by China in 2023 changed regional dynamics"]}`
+    sources:[
+      {l:"Wikipedia",u:"https://en.wikipedia.org/wiki/Nuclear_program_of_Iran"},
+      {l:"IAEA Iran",u:"https://www.iaea.org/topics/iran-and-iaea"},
+      {l:"Arms Control Assoc",u:"https://www.armscontrol.org/factsheets/iran-nuclear-agreement"},
+    ],
+    summary:"Iran's nuclear program has reached an unprecedented advanced state, with enrichment to 60% and an estimated breakout time of ~1–2 weeks to weapons-grade material. Direct Iran-Israel military exchanges in 2024 brought the shadow war into the open. New diplomatic talks via Oman in early 2026 face significant obstacles while Israel maintains its threat of unilateral military action.",
+    history:"Iran's nuclear program began under the Shah in the 1950s with US assistance under Atoms for Peace. After the 1979 Islamic Revolution, it continued covertly. IAEA inspections revealed secret enrichment facilities at Natanz and Arak in 2002, triggering a decade of sanctions and negotiations.\n\nThe 2015 JCPOA (Joint Comprehensive Plan of Action) limited Iranian enrichment in exchange for sanctions relief. It was considered the Obama administration's signature foreign policy achievement. President Trump withdrew the US from the deal in 2018 and reimposed crippling 'maximum pressure' sanctions, causing Iran to progressively abandon its JCPOA limits.\n\nIsrael has waged a covert campaign against Iran's nuclear program: the 2010 Stuxnet cyberattack (developed with the US) destroyed centrifuges; multiple Iranian nuclear scientists were assassinated 2010–2023 in operations attributed to Mossad; Natanz was sabotaged multiple times.\n\nIran has been a key sponsor of regional proxy forces (the 'Axis of Resistance'): Hezbollah in Lebanon, Hamas in Gaza, Houthis in Yemen, and Shia militias in Iraq — giving Iran strategic depth without direct confrontation.",
+    current:"Iran now enriches uranium to 60% — near weapons-grade threshold of 90%. The IAEA estimates Iran has ~185 kg of 60%-enriched uranium, enough — if further enriched — for multiple nuclear devices. Breakout time is estimated at 1–2 weeks. Iran has restricted IAEA inspector access since 2021.\n\nIn April 2024, Iran launched over 300 drones and ballistic missiles directly at Israel — the first direct attack in history. Most were intercepted. Israel retaliated with precision strikes inside Iran. The exchange broke the 'shadow war' convention and raised fears of a wider conflict.\n\nNew indirect US-Iran talks through Oman resumed in early 2026. Iran is demanding full sanctions relief and nuclear program recognition; the US insists on zero enrichment. Israel has stated it will not allow Iran to develop nuclear weapons and reserves the right to strike. European allies are pushing for diplomacy.\n\nIran's domestic situation features ongoing economic hardship from sanctions, occasional protest flare-ups, and the death of President Raisi in a helicopter crash in 2024, won by reformist Masoud Pezeshkian.",
+    why:"Iran's nuclear ambitions stem from a combination of regime survival calculus (nuclear weapons as the ultimate deterrent after watching the fate of Gaddafi and Saddam), regional hegemony aspirations, revolutionary ideology that views the US and Israel as existential adversaries, and the 1953 CIA-backed coup as a foundational national grievance against Western interference.",
+    outlook:"Escalating",
+    timeline:[
+      {date:"1953", event:"CIA-backed coup overthrows PM Mossadegh — foundational Iranian grievance against the West"},
+      {date:"1979", event:"Islamic Revolution; Shah ousted; US hostage crisis begins"},
+      {date:"2010", event:"Stuxnet cyberattack (US-Israel) destroys Iranian centrifuges"},
+      {date:"2015", event:"JCPOA signed — Iran limits enrichment to 3.67%; sanctions eased"},
+      {date:"2018", event:"Trump withdraws from JCPOA; maximum pressure sanctions reimposed"},
+      {date:"2020", event:"US kills General Soleimani; Iran retaliates with missiles at US bases in Iraq"},
+      {date:"Apr 2024", event:"Iran launches 300+ drones and missiles directly at Israel — historic first direct attack"},
+      {date:"2025–26", event:"Iran at 60% enrichment (~2 weeks from weapons grade); Oman diplomatic channel active"},
+    ],
+    keyFacts:[
+      "Iran enriching to 60% — weapons-grade threshold is 90%; IAEA estimates ~1–2 week breakout",
+      "~185 kg of 60%-enriched uranium stockpile (IAEA, late 2025) — enough for multiple devices if further enriched",
+      "Iran's proxy network spans Lebanon (Hezbollah), Yemen (Houthis), Iraq (PMF), Gaza (Hamas)",
+      "Israel assassinated multiple top Iranian nuclear scientists since 2010",
+      "Iran has largest ballistic missile arsenal in Middle East — 3,000+ missiles",
+      "Hezbollah has 150,000+ rockets aimed at Israel — funded and armed by Iran",
+      "IAEA denied access to key nuclear sites since 2021; monitoring severely degraded",
+      "Iran-Russia military cooperation: Iran supplying Shahed drones used extensively in Ukraine",
+      "Saudi Arabia-Iran normalization deal brokered by China in 2023 changed regional dynamics",
+      "Iran's domestic economy: 40%+ inflation, currency at historic lows, despite oil sale workarounds",
+    ]
   },
   {
-    id:"northkorea",name:"Korean Peninsula Crisis",region:"East Asia",
-    lat:39.0,lon:127.5,tension:77,color:"#ff7b00",
+    id:"northkorea", name:"Korean Peninsula Crisis", region:"East Asia",
+    lat:39.0, lon:127.5, tension:77, color:"#ff7b00",
     parties:[{n:"North Korea",m:1},{n:"South Korea",m:1},{n:"USA",m:1},{n:"China",m:1},{n:"Japan",m:0},{n:"Russia",m:0}],
-    q:`Senior geopolitical analyst, 2025-2026. Comprehensive intelligence report on the Korean Peninsula Crisis.
-Return ONLY valid JSON, no markdown:
-{"summary":"3-4 sentence executive summary of Korean peninsula situation as of early 2026","history":"5-6 paragraphs: Japanese colonization, 1945 division, Korean War 1950-53 and armistice, Cold War proxy conflict, Kim dynasty nuclear program, Six-Party Talks failure, Kim Jong-un acceleration of missiles and nukes","current":"4-5 paragraphs: ICBM capability reaching all US cities, tactical nuclear doctrine, Kim-Putin partnership and troops to Ukraine, South Korea political crisis and martial law attempt Dec 2024, US-ROK exercises, Japan rapid rearmament","why":"ROOT CAUSES: Kim regime survival requiring nuclear deterrence, US hostile policy perception, unresolved Korean War, China's buffer state interest, economic isolation fueling military dependency","outlook":"Escalating","timeline":[{"date":"1953","event":"Korean War armistice — no peace treaty; Korea remains divided at 38th parallel"},{"date":"2006","event":"North Korea conducts first nuclear test — UN sanctions imposed"},{"date":"2017","event":"Tests hydrogen bomb and Hwasong-15 ICBM reaching continental USA"},{"date":"2018","event":"Kim-Trump Singapore Summit — historic but denuclearization fails"},{"date":"2022","event":"Record 70+ ballistic missile tests in single year"},{"date":"2024","event":"Kim-Putin summit; 10,000+ North Korean troops deployed to fight in Ukraine"},{"date":"Dec 2024","event":"South Korean President Yoon declares martial law — reversed within hours; impeachment follows"},{"date":"2025-26","event":"North Korea declared nuclear state in constitution; denuclearization considered impossible"}],"keyFacts":["North Korea has estimated 40-50 nuclear warheads with growing stockpile","Hwasong-17 ICBM can reach any city in the continental United States","28,500 US troops permanently stationed in South Korea","North Korea reportedly sent 10,000+ troops alongside Russian forces in Ukraine","South Korean martial law crisis Dec 2024 created political vacuum exploited by North","Kim Jong-un's regime has conducted 6 nuclear tests since 2006","Japan doubled defense budget to $80 billion — direct response to North Korea and China","Three generations of Kim family have ruled since 1948 — world's only hereditary communist state","North Korea constitution now explicitly enshrines nuclear status — no going back","Six-Party Talks collapsed in 2009; no multilateral framework for denuclearization exists"]}`
+    sources:[
+      {l:"Wikipedia",u:"https://en.wikipedia.org/wiki/North_Korea_and_weapons_of_mass_destruction"},
+      {l:"38 North",u:"https://www.38north.org/"},
+      {l:"UN Panel Reports",u:"https://www.un.org/securitycouncil/sanctions/1718/panel-experts/reports"},
+    ],
+    summary:"North Korea has deepened its military-strategic partnership with Russia, supplying millions of artillery shells and over 10,000 troops for use in Ukraine in exchange for technology and economic support. Its nuclear and ICBM programs continue advancing. South Korea experienced a dramatic political crisis in December 2024 when President Yoon briefly declared martial law, creating instability that Pyongyang may exploit.",
+    history:"Korea was divided at the 38th parallel in 1945 when Soviet and US forces accepted Japanese surrender north and south respectively. The Korean War (1950–53) — triggered by a North Korean invasion — killed an estimated 3 million people and ended in an armistice, not a peace treaty. The two Koreas remain technically at war.\n\nNorth Korea's Kim dynasty (Kim Il-sung, Kim Jong-il, Kim Jong-un) has maintained power since 1948 through an extreme cult of personality, brutal repression, and military-first (Songun) ideology. The regime concluded from Libya and Iraq that only nuclear weapons guarantee survival.\n\nNorth Korea conducted six nuclear tests (2006, 2009, 2013, 2016 x2, 2017). The 2017 test was estimated at 250 kilotons. Multiple ICBM tests have demonstrated the ability to strike the continental US. Kim-Trump Singapore Summit (2018) raised hopes but collapsed without any denuclearization agreement.",
+    current:"Kim Jong-un has declared denuclearization off the table and enshrined nuclear status in the North Korean constitution. The Kim-Putin partnership has transformed into a mutual defense arrangement: North Korea sent an estimated 10,000+ troops and millions of artillery shells to Russia's Ukraine front; in exchange, Russia has provided fuel, food, satellite technology, and diplomatic cover.\n\nSouth Korean President Yoon Suk-yeol's dramatic December 2024 martial law declaration — reversed within hours by the National Assembly — led to his impeachment and created months of political instability. The Constitutional Court upheld his removal in 2025, leading to new elections won by the liberal opposition.\n\nJapan has doubled its defense budget to $80 billion annually, explicitly citing North Korea and China. The US-Japan-South Korea trilateral security cooperation has strengthened despite South Korea's political turbulence.\n\nNorth Korea's domestic situation remains opaque: Kim Jong-un's daughter Kim Ju-ae has appeared at multiple military events in what analysts interpret as succession preparation.",
+    why:"North Korea maintains its nuclear program as the only guarantee of Kim regime survival. The fates of Saddam Hussein (no WMDs, invaded) and Muammar Gaddafi (gave up WMDs, overthrown) are cited internally as lessons. China values North Korea as a buffer state against US forces on its border but is frustrated by the unpredictability and weapons proliferation.",
+    outlook:"Escalating",
+    timeline:[
+      {date:"1953", event:"Korean War armistice — no peace treaty; Korea remains divided; 3 million dead"},
+      {date:"2006", event:"North Korea conducts first nuclear test — UN sanctions imposed"},
+      {date:"2017", event:"Tests hydrogen bomb (~250 kt) and Hwasong-15 ICBM reaching continental USA"},
+      {date:"2018", event:"Kim-Trump Singapore Summit — historic but denuclearization fails to materialize"},
+      {date:"2022", event:"Record 70+ ballistic missile tests in single year; inter-continental range confirmed"},
+      {date:"2024", event:"Kim-Putin summit; 10,000+ North Korean troops deployed to fight in Ukraine"},
+      {date:"Dec 2024", event:"South Korean President Yoon declares martial law — reversed within hours; impeached"},
+      {date:"2025–26", event:"North Korea declared nuclear state in constitution; DPRK-Russia alliance deepens"},
+    ],
+    keyFacts:[
+      "North Korea has estimated 40–50 nuclear warheads with growing stockpile (Bulletin of Atomic Scientists 2025)",
+      "Hwasong-17 ICBM can reach any city in the continental United States",
+      "10,000+ North Korean troops deployed alongside Russian forces in Ukraine from late 2024",
+      "North Korea supplied millions of 152mm artillery shells to Russia — critical for its Ukraine campaign",
+      "28,500 US troops permanently stationed in South Korea; 54,000 in Japan",
+      "South Korean political crisis (Dec 2024 martial law) created rare domestic instability",
+      "Japan doubled defense budget to $80 billion — direct response to North Korea and China",
+      "North Korean constitution now explicitly enshrines nuclear state status — no going back",
+      "DPRK has fired 100+ ballistic missiles since 2022 — testing under 'normal operations' cover",
+      "Kim Ju-ae (Kim's daughter, ~12) increasingly appearing at military events — succession signal",
+    ]
   },
   {
-    id:"southchinasea",name:"South China Sea Disputes",region:"Southeast Asia",
-    lat:12.0,lon:114.0,tension:74,color:"#ff7b00",
+    id:"southchinasea", name:"South China Sea Disputes", region:"Southeast Asia",
+    lat:12.0, lon:114.0, tension:74, color:"#ff7b00",
     parties:[{n:"China",m:1},{n:"Philippines",m:1},{n:"Vietnam",m:0},{n:"USA",m:1},{n:"Malaysia",m:0}],
-    q:`Senior geopolitical analyst, 2025-2026. Comprehensive intelligence report on South China Sea.
-Return ONLY valid JSON, no markdown:
-{"summary":"3-4 sentence executive summary as of early 2026","history":"5-6 paragraphs: historical Chinese claims, UNCLOS 1982, China's island-building program 2013-2016, 2016 Hague Tribunal ruling, US Freedom of Navigation operations, Philippine-China escalations","current":"4-5 paragraphs: China coast guard confrontations with Philippines at Scarborough Shoal and Second Thomas Shoal, water cannon incidents, US-Philippines EDCA expansion, gray zone tactics, BRP Sierra Madre flashpoint, 2024-2025 incidents","why":"ROOT CAUSES: China's Nine-Dash Line claim (90% of SCS), $3.4 trillion annual trade route, massive oil and gas reserves, strategic military positioning, UNCLOS vs historical claims legal conflict","outlook":"Escalating","timeline":[{"date":"1947","event":"China publishes eleven-dash line map claiming most of South China Sea"},{"date":"2013-16","event":"China constructs 7 artificial islands with runways, missiles, military facilities in Spratlys"},{"date":"2016","event":"Hague Tribunal rules Nine-Dash Line has no legal basis; China rejects ruling entirely"},{"date":"2023","event":"China blocks Philippine resupply missions to BRP Sierra Madre with water cannons"},{"date":"2024","event":"Multiple violent confrontations; Philippine sailors injured; US-Philippines defense pact invoked"},{"date":"2025","event":"US-Philippines joint patrols increase; Australia joins exercises; China escalates coast guard presence"}],"keyFacts":["$3.4 trillion in global trade passes through South China Sea annually","China controls 7 artificial islands with full military installations in Spratly Islands","2016 Hague ruling declared Nine-Dash Line has no legal basis — China ignores it","Estimated 11 billion barrels of oil and 190 trillion cubic feet of natural gas in the sea","US conducts 30+ Freedom of Navigation Operations annually","China coast guard vessels outnumber entire Philippines navy","US-Philippines Mutual Defense Treaty of 1951 potentially covers Philippine vessels","BRP Sierra Madre — deliberately grounded 1940s ship — is center of most confrontations","Vietnam, Philippines, Malaysia, Brunei, Taiwan all have overlapping claims with China","China's Maritime Militia uses civilian-flagged fishing boats for military operations"]}`
+    sources:[
+      {l:"Wikipedia",u:"https://en.wikipedia.org/wiki/South_China_Sea_disputes"},
+      {l:"CSIS AMTI",u:"https://amti.csis.org/"},
+      {l:"USNI News",u:"https://news.usni.org/category/fleet-tracker"},
+    ],
+    summary:"China continues gray-zone pressure operations using coast guard and maritime militia to assert control over disputed waters, most dramatically at Second Thomas Shoal where Philippine resupply missions face water cannon and vessel ramming. The Philippines under Marcos Jr. has taken an increasingly firm stance backed by expanded US military access. The region sits astride $3–5 trillion in annual trade.",
+    history:"The South China Sea has been claimed by China based on a 'Nine-Dash Line' map first published in 1947, covering approximately 90% of the sea. This overlaps with the exclusive economic zones of Vietnam, Philippines, Malaysia, Brunei, and Taiwan, all of which have competing claims.\n\nChina's island-building campaign (2013–2016) transformed seven reefs and shoals in the Spratly Islands into artificial islands with military facilities — runways, hangars, radar arrays, anti-ship and surface-to-air missiles. This created military outposts 1,000+ km from the Chinese mainland.\n\nIn 2016, the Permanent Court of Arbitration ruled that China's Nine-Dash Line claims have no basis in international law under UNCLOS. China categorically rejected the ruling and has never complied with it. The US conducts regular Freedom of Navigation Operations (FONOPs) to contest China's excessive claims.",
+    current:"The most intense current flashpoint is Second Thomas Shoal (Ayungin Shoal), where the Philippines deliberately grounded the BRP Sierra Madre in 1999 to maintain a presence. Philippine marines rotate on the rusting vessel; China's coast guard blocks and attacks resupply missions with water cannon and vessel ramming. Several Philippine sailors have been injured.\n\nThe US-Philippines Enhanced Defense Cooperation Agreement (EDCA) was expanded in 2023–24 to cover nine Philippine bases, including four near the Taiwan Strait. The US Mutual Defense Treaty has been explicitly stated to cover Philippine vessels, aircraft, and armed forces in the South China Sea.\n\nAustralia and Japan have joined US-Philippines exercises. Vietnam quietly coordinates with the US despite maintaining formal non-alignment. China has responded by expanding coast guard patrols and conducting regular PLA Navy exercises.\n\nChina has also deployed the world's largest coast guard vessel (Jiaolong-class, 165m) to the South China Sea, dwarfing Philippine vessels.",
+    why:"China views the South China Sea as historically Chinese and strategically vital for its naval power projection, resource access (estimated 11 billion barrels of oil, 190 trillion cubic feet of gas), and control of maritime chokepoints. For the US and its allies, freedom of navigation through these waters is fundamental to the global trading system.",
+    outlook:"Escalating",
+    timeline:[
+      {date:"1947", event:"China publishes eleven-dash line map claiming most of South China Sea"},
+      {date:"2013–16", event:"China constructs 7 artificial islands with military facilities in Spratlys — 3,200+ acres"},
+      {date:"2016", event:"Hague Tribunal rules Nine-Dash Line has no legal basis; China rejects ruling entirely"},
+      {date:"2023", event:"China blocks Philippine resupply missions to BRP Sierra Madre with water cannon — escalation begins"},
+      {date:"2024", event:"Multiple violent confrontations; Philippine sailors injured; US-Philippines defense pact invoked"},
+      {date:"2025", event:"EDCA expanded to 9 Philippine bases; Australia, Japan join exercises; China escalates coast guard presence"},
+    ],
+    keyFacts:[
+      "$3–5 trillion in global trade passes through South China Sea annually — one-third of world's maritime commerce",
+      "China controls 7 artificial islands with full military installations (runways, missiles, radar) in Spratlys",
+      "2016 Hague ruling declared Nine-Dash Line has no legal basis — China ignores it",
+      "Estimated 11 billion barrels of oil and 190 trillion cubic feet of natural gas in the sea",
+      "US conducts 30+ Freedom of Navigation Operations annually in South China Sea",
+      "China coast guard fleet is world's largest — outnumbers entire Philippine navy in every category",
+      "US-Philippines Mutual Defense Treaty explicitly covers South China Sea incidents",
+      "BRP Sierra Madre — deliberately grounded 1940s ship — is center of most confrontations with China",
+      "Vietnam, Philippines, Malaysia, Brunei, Taiwan all have overlapping claims with China",
+      "China deploys maritime militia — civilian-flagged fishing boats conducting military operations",
+    ]
   },
   {
-    id:"kashmir",name:"Kashmir Conflict",region:"South Asia",
-    lat:34.0,lon:76.5,tension:71,color:"#ff7b00",
+    id:"kashmir", name:"Kashmir Conflict", region:"South Asia",
+    lat:34.0, lon:76.5, tension:71, color:"#ff7b00",
     parties:[{n:"India",m:1},{n:"Pakistan",m:1},{n:"China",m:0},{n:"Kashmiris",m:1}],
-    q:`Senior geopolitical analyst, 2025-2026. Comprehensive intelligence report on Kashmir Conflict.
-Return ONLY valid JSON, no markdown:
-{"summary":"3-4 sentence executive summary","history":"5-6 paragraphs: 1947 partition and accession dispute, three India-Pakistan wars, Simla Agreement 1972, 1989 insurgency, 1999 Kargil War, 2019 Article 370 revocation, Chinese claims in Aksai Chin","current":"4-5 paragraphs: Post-Article 370 situation, ongoing militancy, India-China border tensions at LAC, 2020 Galwan Valley clash, partial disengagement, Pakistan economic crisis affecting conflict dynamics, diplomatic freeze","why":"ROOT CAUSES: 1947 partition incomplete resolution, religious demographics, water rights, nuclear deterrence preventing full war, Pakistani strategic depth doctrine, Indian nationalist politics, Kashmiri self-determination","outlook":"Stalemate","timeline":[{"date":"1947","event":"Partition of India; Kashmir disputed; first India-Pakistan war over accession"},{"date":"1999","event":"Kargil War — Pakistani forces cross LoC; nuclear threats exchanged; India recaptures"},{"date":"2019","event":"India revokes Article 370 — strips Jammu & Kashmir of special autonomous status"},{"date":"Jun 2020","event":"Galwan Valley clash — 20 Indian, 4+ Chinese soldiers killed in hand-to-hand combat"},{"date":"2021-24","event":"India-China partial disengagement at multiple friction points along LAC"},{"date":"2025-26","event":"Continued militant activity in Kashmir; India-Pakistan diplomatic freeze ongoing"}],"keyFacts":["Both India and Pakistan are nuclear-armed — makes Kashmir world's most dangerous flashpoint","Over 70,000 people killed in Kashmir insurgency since 1989","India has 500,000+ security forces deployed in Kashmir — world's most militarized zone","Three full-scale wars fought between India and Pakistan: 1947, 1965, 1971","China controls Aksai Chin (38,000 sq km) — claimed by India as its territory","Article 370 revocation in 2019 stripped Kashmir of its special status and statehood","Indus Waters Treaty governing water sharing is under increasing strain","Line of Control is 740km long and among world's most contested borders","India and China completed partial military disengagement at Galwan, Depsang by 2024","Pakistan's economic crisis (IMF bailouts) constrains its ability to escalate"]}`
+    sources:[
+      {l:"Wikipedia",u:"https://en.wikipedia.org/wiki/Kashmir_conflict"},
+      {l:"ACLED South Asia",u:"https://acleddata.com/south-asia/"},
+      {l:"ReliefWeb",u:"https://reliefweb.int/country/pak"},
+    ],
+    summary:"Kashmir remains one of the world's most dangerous military flashpoints — a contested territory between two nuclear-armed states. India's 2019 revocation of Article 370 has inflamed tensions while India-China border standoffs in Ladakh add a third dimension. Pakistan's severe economic crisis constrains its military options but not its support for militant groups. The 1999 Kargil War demonstrated how quickly the dispute can approach nuclear thresholds.",
+    history:"Kashmir's dispute originates in the chaotic 1947 partition of British India. The Muslim-majority princely state was ruled by a Hindu maharaja, Hari Singh, who delayed accession. When Pakistani tribal militias invaded, Singh acceded to India in exchange for military aid. India took the dispute to the UN, which called for a plebiscite that has never been held.\n\nIndia and Pakistan fought full wars over Kashmir in 1947, 1965, and 1971 (the latter primarily in East Pakistan/Bangladesh but with a Kashmir dimension). The Simla Agreement (1972) established the Line of Control as the de facto border and committed both sides to bilateral negotiations.\n\nA major insurgency erupted in Indian Kashmir in 1989, with Pakistan supporting various militant groups. An estimated 70,000 people died in the conflict through the 2000s. Pakistan tested nuclear weapons in 1998, just weeks after India's tests — creating South Asia's nuclear standoff.\n\nThe 1999 Kargil War was the most dangerous episode: Pakistani forces secretly occupied Indian positions across the LoC; India retook the positions; nuclear threats were exchanged in private communications. The US intervened diplomatically to prevent escalation.",
+    current:"India's August 2019 revocation of Article 370 stripped Jammu and Kashmir of its special autonomous status and divided it into two Union Territories under direct central government control. The move was condemned by Pakistan and human rights organizations; thousands were detained including political leaders; internet was cut for months.\n\nIn June 2020, Indian and Chinese troops clashed in the Galwan Valley in Ladakh, killing 20 Indian and at least 4 Chinese soldiers in hand-to-hand combat — the first deadly India-China clash since 1975. After years of standoff involving 50,000+ troops on each side, partial disengagement at Depsang and Demchok was completed by late 2024, with Indian PM Modi visiting China.\n\nPakistan's economic crisis (multiple IMF bailouts, 30%+ inflation, political instability following Imran Khan's 2022 ouster and 2023 imprisonment) has constrained conventional military capabilities but not support for militant proxies. Militant attacks in Kashmir continue at lower levels than peak insurgency.",
+    why:"The dispute stems from the unresolved 1947 partition, religious demographics (Muslim-majority territory under Indian Hindu-majority rule), water rights (Indus river system), Pakistani 'strategic depth' doctrine, Indian nationalist politics, and Kashmiri self-determination aspirations. Nuclear deterrence prevents full-scale war but also emboldens risk-taking below the nuclear threshold.",
+    outlook:"Stalemate",
+    timeline:[
+      {date:"1947", event:"Partition of India; Kashmir disputed; first India-Pakistan war over accession"},
+      {date:"1998", event:"India and Pakistan both conduct nuclear tests within weeks of each other"},
+      {date:"1999", event:"Kargil War — Pakistani forces cross LoC; nuclear threats exchanged; India recaptures"},
+      {date:"2019", event:"India revokes Article 370 — strips Jammu & Kashmir of special autonomous status"},
+      {date:"Jun 2020", event:"Galwan Valley clash — 20 Indian, 4+ Chinese soldiers killed in hand-to-hand combat"},
+      {date:"2021–24", event:"India-China partial disengagement at multiple friction points along LAC"},
+      {date:"2025–26", event:"Continued militant activity in Kashmir; India-Pakistan diplomatic freeze; India-China rapprochement"},
+    ],
+    keyFacts:[
+      "Both India and Pakistan are nuclear-armed — makes Kashmir world's most dangerous nuclear flashpoint",
+      "Over 70,000 people killed in Kashmir insurgency since 1989 (estimates vary widely)",
+      "India maintains 500,000+ security forces deployed in Jammu & Kashmir — world's most militarized zone",
+      "Three full-scale India-Pakistan wars: 1947, 1965, 1971; multiple crises including Kargil 1999",
+      "China controls Aksai Chin (38,000 km²) — claimed by India as its own territory",
+      "Article 370 revocation in 2019 stripped Kashmir of its special status and statehood",
+      "India and China completed partial military disengagement at Galwan, Depsang, Demchok by 2024",
+      "Pakistan's economic crisis (IMF bailouts) constrains military options but not militant support",
+      "Line of Control is 740 km long — one of world's most contested borders",
+      "Indus Waters Treaty governing water sharing is under increasing political strain",
+    ]
   },
   {
-    id:"sudan",name:"Sudan Civil War",region:"East Africa",
-    lat:15.5,lon:32.5,tension:85,color:"#ff3a3a",
+    id:"sudan", name:"Sudan Civil War", region:"East Africa",
+    lat:15.5, lon:32.5, tension:85, color:"#ff3a3a",
     parties:[{n:"SAF (Army)",m:1},{n:"RSF (Dagalo)",m:1},{n:"UAE",m:0},{n:"Egypt",m:0},{n:"Russia",m:0}],
-    q:`Senior geopolitical analyst, 2025-2026. Comprehensive intelligence report on Sudan Civil War.
-Return ONLY valid JSON, no markdown:
-{"summary":"3-4 sentence executive summary — note this is world's largest displacement and hunger crisis","history":"5-6 paragraphs: Bashir dictatorship and Darfur genocide, 2019 revolution, transitional government, October 2021 military coup, Janjaweed militia transformation into RSF, power-sharing breakdown leading to April 2023 war","current":"4-5 paragraphs: SAF vs RSF warfare in Khartoum (RSF-controlled), Darfur ethnic massacres, El Fasher siege, world's worst hunger crisis, foreign arms supplies, international community paralysis, 2025 situation","why":"ROOT CAUSES: SAF-RSF power struggle, RSF integration dispute, gold revenue control, UAE vs Egypt proxy competition, transition to democracy failure, Sudanese state fragility","outlook":"Escalating","timeline":[{"date":"2003","event":"Darfur genocide — Janjaweed militia kills 300,000+; Bashir indicted by ICC"},{"date":"2019","event":"Popular revolution overthrows Bashir; transitional civilian-military government formed"},{"date":"2021","event":"Military coup by SAF and RSF jointly; civilian rule ended"},{"date":"Apr 15 2023","event":"War erupts between SAF and RSF in Khartoum — catches 7 million civilians in crossfire"},{"date":"2024","event":"Famine officially declared in Darfur — first famine anywhere since 2017"},{"date":"2025-26","event":"War enters third year; 150,000+ dead; 11+ million displaced; RSF controls most of Khartoum"}],"keyFacts":["Sudan war created world's largest displacement crisis — 11+ million people driven from homes","Over 150,000 killed — one of world's deadliest active conflicts, almost invisible to Western media","25 million Sudanese (half the population) face acute food insecurity","Famine officially declared in North Darfur 2024 — first famine declared anywhere in 7 years","RSF controls most of Khartoum — a capital city of 7 million is a warzone","UAE accused of arming RSF through Libya despite arms embargo","Sudan's healthcare system collapsed — 80%+ of hospitals non-functional","ICC called RSF's Darfur actions genocide — arrest warrants issued","Sudan has some of world's largest gold reserves — key prize in the war","International attention critically low despite enormous human suffering"]}`
+    sources:[
+      {l:"Wikipedia",u:"https://en.wikipedia.org/wiki/2023_Sudanese_civil_war"},
+      {l:"UN OCHA Sudan",u:"https://www.unocha.org/sudan"},
+      {l:"ACLED Sudan",u:"https://acleddata.com/2023/05/05/sudan-conflict-observatory/"},
+      {l:"ReliefWeb",u:"https://reliefweb.int/country/sdn"},
+    ],
+    summary:"Sudan's civil war — the world's largest displacement and worst hunger crisis — is entering its third year with no diplomatic resolution in sight. The SAF has retaken parts of Khartoum state in 2025 but the RSF controls most of Darfur where genocide-level atrocities and famine continue. With 11+ million displaced and 25 million facing food insecurity, it is the world's worst humanitarian catastrophe, largely invisible to Western media.",
+    history:"Sudan's modern crisis cannot be separated from the 30-year dictatorship of Omar al-Bashir (1989–2019), whose regime used the Janjaweed Arab militia to commit genocide in Darfur (2003–10), killing an estimated 300,000 and displacing millions. The ICC indicted Bashir for war crimes and genocide.\n\nMass protests overthrew Bashir in April 2019, leading to a transitional Sovereignty Council sharing power between civilians and the military. The RSF (Rapid Support Forces) was the rebranded Janjaweed under commander Mohamed Hamdan Dagalo ('Hemeti'), now institutionalized with enormous power.\n\nA military coup in October 2021 — led jointly by SAF General Abdel Fattah al-Burhan and Hemeti — ended the democratic transition. The two men then fell out over the terms of integrating the RSF into the regular army (a requirement of the Jeddah peace framework), with both sides seeking to control Sudan's gold resources and political future.\n\nOn April 15, 2023, RSF attacked SAF positions across Sudan simultaneously, catching 7 million Khartoum civilians in the crossfire and launching the most destructive African conflict in decades.",
+    current:"After initial RSF advances that gave it control of most of Khartoum (a capital of 7 million people), the SAF launched counteroffensives in late 2024 and 2025, retaking Omdurman and parts of the capital. However the RSF controls most of Darfur, where it has carried out ethnic massacres against non-Arab communities — described by the UN as genocide.\n\nEl Fasher, Darfur's last major non-RSF city, has been under siege with civilians trapped. Famine was officially declared in North Darfur camps in 2024 — the first famine declared anywhere in the world since 2017. The UN estimates 25 million people (half Sudan's population) face acute food insecurity.\n\nThe UAE has been documented arming the RSF through Libya despite UN arms embargo, according to UN Panel of Experts reports. Egypt has provided air support and weapons to the SAF. Russia has positioned itself to supply weapons to both sides.\n\nInternational mediation efforts through the Jeddah talks, African Union, and IGAD have repeatedly failed. Neither side believes it can be defeated militarily.",
+    why:"The war's immediate trigger was the power struggle over RSF integration and who would control Sudan's political and economic future. Deeper causes include Sudan's extreme state fragility after decades of authoritarian misrule, competition over gold (Sudan has significant reserves), the failure to complete democratic transition, and external powers (UAE, Egypt, Russia) pursuing proxy interests at the expense of Sudanese civilians.",
+    outlook:"Escalating",
+    timeline:[
+      {date:"2003", event:"Darfur genocide — Janjaweed militia kills 300,000+; Bashir indicted by ICC"},
+      {date:"2019", event:"Popular revolution overthrows Bashir; transitional civilian-military government formed"},
+      {date:"2021", event:"Military coup by SAF and RSF jointly; democratic transition ended"},
+      {date:"Apr 2023", event:"War erupts between SAF and RSF — Khartoum, a city of 7 million, becomes a warzone"},
+      {date:"2024", event:"Famine officially declared in North Darfur — first famine anywhere since 2017"},
+      {date:"2025–26", event:"SAF retakes Omdurman; RSF continues Darfur genocide; 150,000+ dead; no peace in sight"},
+    ],
+    keyFacts:[
+      "Sudan war created world's largest displacement crisis — 11+ million driven from homes (surpassing Ukraine)",
+      "Over 150,000 killed — one of world's deadliest active conflicts, almost invisible to Western media",
+      "25 million Sudanese (half the population) face acute food insecurity — world's worst hunger crisis",
+      "Famine officially declared in North Darfur 2024 — first famine declared anywhere in 7 years",
+      "RSF controls most of Khartoum — the capital city of 7 million has been largely destroyed",
+      "UAE documented arming RSF through Libya despite UN arms embargo (UN Panel of Experts)",
+      "Sudan's healthcare system has collapsed — 80%+ of hospitals non-functional",
+      "ICC called RSF's Darfur actions genocide; international accountability remains absent",
+      "Sudan has significant gold reserves — a key economic prize both sides are fighting to control",
+      "International attention critically low despite the enormous scale of human suffering",
+    ]
   },
   {
-    id:"sahel",name:"Sahel — Africa's Collapse Zone",region:"West Africa",
-    lat:15.0,lon:2.0,tension:68,color:"#ffaa00",
+    id:"sahel", name:"Sahel — Africa's Collapse Zone", region:"West Africa",
+    lat:15.0, lon:2.0, tension:68, color:"#ffaa00",
     parties:[{n:"Mali",m:1},{n:"Niger",m:1},{n:"Burkina Faso",m:1},{n:"Russia/Africa Corps",m:1},{n:"JNIM (AQ)",m:0},{n:"France (expelled)",m:0}],
-    q:`Senior geopolitical analyst, 2025-2026. Comprehensive intelligence report on the Sahel Crisis.
-Return ONLY valid JSON, no markdown:
-{"summary":"3-4 sentence executive summary as of early 2026","history":"5-6 paragraphs: Post-colonial legacy, 2011 Libya collapse and weapons proliferation, 2012 Mali coup and Tuareg rebellion, French Operation Serval then Barkhane, spread of jihadist insurgency, multiple coups 2020-2023, anti-French sentiment explosion","current":"4-5 paragraphs: Alliance of Sahel States (AES) formed, French forces expelled, Wagner Group/Africa Corps deployed, jihadist territorial gains, civilian massacres, Russian influence replacing French, coastal West Africa threatened, ECOWAS irrelevance","why":"ROOT CAUSES: Colonial borders ignoring ethnic groups, climate change and desertification, extreme poverty, weak governance, arms proliferation from Libya, Françafrique neocolonialism, jihadist ideology filling governance vacuum","outlook":"Escalating","timeline":[{"date":"2011","event":"Libya collapses — weapons flood into Sahel; Tuareg fighters return from Gaddafi's army"},{"date":"2012","event":"Tuareg rebellion in northern Mali; military coup; jihadists seize major northern cities"},{"date":"2021","event":"Mali coup #2; Wagner Group mercenaries arrive; France-Mali relations collapse"},{"date":"2022","event":"Burkina Faso suffers two coups; France expelled; jihadists control 40% of territory"},{"date":"2023","event":"Niger coup overthrows elected Bazoum; AES alliance (Mali, Niger, Burkina) formed"},{"date":"2024","event":"France completely expelled from region; Wagner renamed Africa Corps; jihadists reach coastal states"},{"date":"2025-26","event":"AES negotiating exit from ECOWAS; Russia deepens military ties; jihadist attacks now in Togo, Benin"}],"keyFacts":["Sahel has world's fastest-growing jihadist insurgency — attacks increased 40% in 2023-24","Over 2 million people displaced across Mali, Niger, Burkina Faso","Wagner Group/Africa Corps has 1,500-2,000 fighters across the region","France spent $9 billion on Sahel military operations over 9 years with minimal results","Burkina Faso lost control of 40% of its territory to jihadist groups by 2024","Niger is world's 7th largest uranium producer — critical for French nuclear energy","Climate change driving desertification — Lake Chad shrunk 90% in 60 years","JNIM (Al-Qaeda affiliate) and ISGS (ISIS affiliate) control vast rural territories","Jihadist expansion now threatening stable coastal nations: Côte d'Ivoire, Benin, Togo","Anti-French and anti-Western sentiment has been weaponized by Russian disinformation"]}`
+    sources:[
+      {l:"Wikipedia",u:"https://en.wikipedia.org/wiki/Insurgency_in_the_Sahel"},
+      {l:"ACLED Sahel",u:"https://acleddata.com/sahel/"},
+      {l:"UN OCHA W.Africa",u:"https://www.unocha.org/west-and-central-africa"},
+    ],
+    summary:"The Sahel hosts the world's fastest-growing jihadist insurgency, with Al-Qaeda's JNIM and ISIS-Sahel controlling significant rural territories across Mali, Burkina Faso, and Niger. Three military coups (2021–2023) expelled French forces and invited Russian Africa Corps (ex-Wagner). The insurgency is now spreading south into coastal West African states that were previously considered stable.",
+    history:"The Sahel's crisis has deep roots in colonially-drawn borders that ignored ethnic realities, chronic poverty, and governance failures. The 2011 collapse of Libya unleashed weapons across the Sahara and saw Tuareg fighters who had served Gaddafi return home with heavy weapons, triggering the 2012 Tuareg rebellion in northern Mali.\n\nJihadist groups (AQIM, later JNIM) exploited the chaos to seize northern Malian cities including Timbuktu and Gao in 2012. French Operation Serval (2013) and the follow-on Barkhane operation (2014–2022) prevented total state collapse but did not defeat the insurgency — indeed, jihadi attacks increased substantially during the French presence.\n\nAnti-French sentiment, fueled by perceptions of neocolonialism and Russian disinformation, exploded. Military coups ousted civilian governments in Mali (2021), Burkina Faso (2022, twice), and Niger (2023). Each junta expelled French forces and invited Russian Wagner Group (now Africa Corps) mercenaries.",
+    current:"The Alliance of Sahel States (AES) — Mali, Burkina Faso, Niger — formalized their partnership in 2024, announced departure from ECOWAS, and aligned more closely with Russia. Africa Corps (2,000+ fighters) operates across the region, conducting operations alongside national armies and doing little to reduce jihadist attacks.\n\nBurkina Faso's military government under Ibrahim Traoré has been particularly brutal, with reports of military massacres of civilians accused of jihadist sympathy. The UN estimates over 2 million displaced across the Sahel. Burkina Faso ranked as the world's most dangerous country for civilians by ACLED in 2024.\n\nThe insurgency has begun penetrating coastal West Africa, with attacks in northern Côte d'Ivoire, Benin, and Togo — previously stable states. Nigeria, the region's largest economy, faces jihadist pressure in its northwest and northeast simultaneously.\n\nNiger's uranium (7th largest global producer) is now controlled by the junta, creating energy security concerns for France which depended on it for nuclear power.",
+    why:"The Sahel's collapse stems from colonially-imposed borders that divided ethnic groups and created weak states; climate change driving desertification (Lake Chad shrunk 90% in 60 years), agricultural failure, and farmer-herder conflict over shrinking resources; jihadist ideology filling the governance vacuum; and the 2011 Libyan war as a catalyst for weapons proliferation.",
+    outlook:"Escalating",
+    timeline:[
+      {date:"2011", event:"Libya collapses — weapons flood into Sahel; Tuareg fighters return with heavy arms"},
+      {date:"2012", event:"Tuareg rebellion in northern Mali; military coup; jihadists seize major northern cities"},
+      {date:"2021", event:"Mali coup #2; Wagner Group mercenaries arrive; France-Mali relations collapse"},
+      {date:"2022", event:"Burkina Faso suffers two coups; France expelled; jihadists control 40% of territory"},
+      {date:"2023", event:"Niger coup overthrows elected Bazoum; AES alliance (Mali, Niger, Burkina) formed"},
+      {date:"2024", event:"France fully expelled from region; Africa Corps replaces Wagner; jihadists reach coastal states"},
+      {date:"2025–26", event:"AES exits ECOWAS; Russia deepens ties; jihadist attacks now in Togo, Benin, Côte d'Ivoire"},
+    ],
+    keyFacts:[
+      "Sahel has world's fastest-growing jihadist insurgency — attacks increased 40% in 2023–24 (ACLED)",
+      "Over 2 million people displaced across Mali, Niger, Burkina Faso",
+      "Wagner Group/Africa Corps has 1,500–2,000 fighters operating across the region",
+      "France spent $9 billion on Sahel military operations over 9 years with minimal strategic results",
+      "Burkina Faso ranked world's most dangerous country for civilians (ACLED 2024)",
+      "Niger is world's 7th largest uranium producer — critical supply for French nuclear energy",
+      "Climate change driving desertification — Lake Chad shrunk 90% in 60 years, fueling conflict",
+      "JNIM (Al-Qaeda) and ISGS (ISIS) control vast rural territories with their own shadow governance",
+      "Jihadist expansion now threatening coastal nations: Côte d'Ivoire, Benin, Togo",
+      "Russian disinformation has actively amplified anti-French and anti-Western sentiment across the region",
+    ]
   },
   {
-    id:"venezuela",name:"Venezuela — Authoritarian Crisis",region:"Latin America",
-    lat:8.0,lon:-66.0,tension:62,color:"#ffd700",
+    id:"venezuela", name:"Venezuela — Authoritarian Crisis", region:"Latin America",
+    lat:8.0, lon:-66.0, tension:62, color:"#ffd700",
     parties:[{n:"Maduro Regime",m:1},{n:"Opposition",m:1},{n:"USA",m:0},{n:"Cuba",m:0},{n:"Russia",m:0},{n:"Colombia",m:0}],
-    q:`Senior geopolitical analyst, 2025-2026. Comprehensive intelligence report on Venezuela.
-Return ONLY valid JSON, no markdown:
-{"summary":"3-4 sentence executive summary as of early 2026","history":"5-6 paragraphs: Chavez Bolivarian revolution and oil wealth, Chavez death 2013 and Maduro succession, economic collapse and hyperinflation, 2019 Guaido parallel government, failed coup, US sanctions regime","current":"4-5 paragraphs: July 2024 fraudulent election — Maduro vs Gonzalez, opposition evidence dismissed, mass arrests, 8 million refugees in region, Gonzalez exile, drug trafficking connections, Russian and Chinese backing, US sanctions recalibration","why":"ROOT CAUSES: Oil dependency without diversification, Chavista ideology vs market economics, US regime change attempts fueling nationalist backlash, systematic corruption, Cuba providing security apparatus","outlook":"Stalemate","timeline":[{"date":"1998","event":"Chavez elected — Bolivarian Socialist revolution; oil revenues fund massive social programs"},{"date":"2013","event":"Chavez dies; Maduro wins disputed election to succeed him; economic deterioration begins"},{"date":"2018","event":"Hyperinflation reaches 1,000,000%; food and medicine shortages become catastrophic"},{"date":"2019","event":"Guaido declares parallel presidency; 50+ nations recognize him; coup attempt fails"},{"date":"Jul 2024","event":"Presidential election — opposition claims Gonzalez won by 2:1 margin; Maduro declared winner; fraud alleged"},{"date":"2025-26","event":"Gonzalez flees to exile; mass arrests of opposition; 8 million Venezuelans now living abroad"}],"keyFacts":["8 million Venezuelans fled the country — largest displacement crisis in Western Hemisphere history","Venezuela has world's largest proven oil reserves but production collapsed 80% under Maduro","Inflation peaked at 1,000,000% in 2018 — currency became essentially worthless","US has offered $15 million reward for Maduro's arrest on drug trafficking charges","Venezuela's GDP contracted by 80% between 2014-2021 — one of history's worst peacetime collapses","Maduro maintains power through military loyalty, Cuban intelligence, and armed colectivos","2024 election opposition collected and published voting tallies showing Gonzalez won by 2-to-1","Russia and China have provided billions in loans in exchange for oil contracts and political cover","Venezuela is primary transit point for Colombian cocaine reaching US and Europe","Regional spillover: Venezuela crisis drives migration through Panama's Darien Gap to US border"]}`
-  }
+    sources:[
+      {l:"Wikipedia",u:"https://en.wikipedia.org/wiki/Crisis_in_Venezuela"},
+      {l:"ReliefWeb",u:"https://reliefweb.int/country/ven"},
+      {l:"R4V Platform",u:"https://www.r4v.info/"},
+      {l:"Human Rights Watch",u:"https://www.hrw.org/americas/venezuela"},
+    ],
+    summary:"Nicolás Maduro has consolidated power following the fraudulent July 2024 election, with opposition candidate Edmundo González in exile recognized as legitimate president by the US and 20+ countries. Venezuela's economic collapse has driven 8 million people abroad — the largest displacement crisis in Western Hemisphere history. Maduro relies on military loyalty, Cuban security apparatus, and Russian and Chinese backing to maintain power.",
+    history:"Venezuela under Hugo Chávez (1999–2013) used oil wealth to fund popular social programs while building a Bolivarian socialist system. Chávez's death from cancer in 2013 brought Nicolás Maduro, his chosen successor, to power in a narrow disputed election. Without Chávez's charisma and facing collapsing oil prices, Maduro's government resorted to economic mismanagement and authoritarian consolidation.\n\nThe economic collapse was catastrophic: GDP contracted ~80% between 2013–2021, inflation reached 1,000,000% in 2018, and shortages of food and medicine became endemic. Over 7.7 million Venezuelans fled the country.\n\nIn 2019, National Assembly President Juan Guaidó declared himself interim president, recognized by ~50 nations including the US. Coup attempts failed; military loyalty kept Maduro in power. US sanctions intensified the economic crisis while also providing Maduro a convenient external explanation.",
+    current:"The July 2024 presidential election was widely documented as fraudulent. The opposition, led by María Corina Machado and candidate Edmundo González, produced voting tallies (actas) from ~80% of polling stations showing González winning by approximately 2:1. Maduro's electoral authority declared Maduro the winner without publishing tallies. Massive street protests were met with arrests; hundreds of political prisoners were taken.\n\nGonzález fled to Spain in exile. The US, EU, and 20+ Latin American and European nations recognized him as the legitimate president-elect. Maduro's government responded by issuing arrest warrants. Brazil's Lula and Colombia's Petro — both left-wing leaders — have tried to negotiate but Maduro refuses to hand over the voting tallies.\n\nVenezuela's oil production has partially recovered (from a low of 400,000 bpd to ~900,000 bpd) through deals with Chevron operating under a US sanctions waiver. Russia and China continue providing diplomatic cover. Cuba provides intelligence and security services.\n\nThe 8 million Venezuelan migrants have destabilized neighbors: Colombia hosts 3 million, Peru 1.5 million, Ecuador 500,000. Venezuelan migration through Panama's Darién Gap became a major US political issue before declining in late 2024–25.",
+    why:"Venezuela's crisis stems from oil dependency without economic diversification, Chavista ideology prioritizing redistribution over production, systematic corruption at all levels, US sanctions (which compounded existing damage while providing political cover for Maduro), and Cuba's export of its security-state model. The military's institutional interests — including involvement in narcotrafficking — are aligned with Maduro's survival.",
+    outlook:"Stalemate",
+    timeline:[
+      {date:"1998", event:"Chávez elected — Bolivarian Socialist revolution; oil revenues fund massive social programs"},
+      {date:"2013", event:"Chávez dies; Maduro wins disputed election; economic deterioration begins rapidly"},
+      {date:"2018", event:"Hyperinflation reaches 1,000,000%; food and medicine shortages become catastrophic"},
+      {date:"2019", event:"Guaidó declares parallel presidency; 50+ nations recognize him; coup attempts fail"},
+      {date:"Jul 2024", event:"Presidential election: opposition claims González won 2:1; Maduro declared winner; fraud alleged"},
+      {date:"2025–26", event:"González flees to exile; mass arrests of opposition; Maduro consolidates despite international rejection"},
+    ],
+    keyFacts:[
+      "8 million Venezuelans fled the country — largest displacement crisis in Western Hemisphere history (R4V/UNHCR)",
+      "July 2024 election: opposition produced voting tallies showing González won ~67% to Maduro's ~30%",
+      "Venezuela has world's largest proven oil reserves but production collapsed ~80% under Maduro",
+      "Inflation peaked at 1,000,000% in 2018 — currency became essentially worthless",
+      "US has offered $15 million reward for Maduro's arrest on drug trafficking charges",
+      "Venezuela's GDP contracted ~80% between 2013–2021 — one of history's worst peacetime economic collapses",
+      "Maduro maintains power through military loyalty, Cuban intelligence, and armed colectivos",
+      "Russia and China provide billions in loans and investment in exchange for oil contracts and political cover",
+      "Venezuela is a major transit route for Colombian cocaine reaching US and European markets",
+      "Regional spillover: Venezuelan migration drove the Darién Gap crossing crisis affecting US border politics",
+    ]
+  },
 ];
 
-// ═══════════════ INIT ═══════════════
+// ═══════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════
 function getTI(t){
   if(t>=90)return{l:"CRITICAL",c:"#ff3a3a"};
   if(t>=75)return{l:"SEVERE",c:"#ff7b00"};
@@ -332,48 +650,115 @@ document.getElementById('ftrTime').textContent = 'UPDATED: '+new Date().toUTCStr
 document.getElementById('sCrit').textContent = HOTSPOTS.filter(h=>h.tension>=90).length;
 document.getElementById('sSev').textContent = HOTSPOTS.filter(h=>h.tension>=75&&h.tension<90).length;
 
-// ═══════════════ MAP ═══════════════
-const map = L.map('map',{center:[20,20],zoom:3,zoomControl:false,attributionControl:false});
+// ═══════════════════════════════════════════════════════════════════
+// MAP SETUP
+// ═══════════════════════════════════════════════════════════════════
+const map = L.map('map',{center:[20,20],zoom:3,zoomControl:false,attributionControl:true});
 
-// OpenStreetMap tile layer (free, no API key needed)
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-  attribution:'© OpenStreetMap contributors',
-  subdomains:'abc',
-  maxZoom:18
-}).addTo(map);
+// Base tile layers
+const baseLayers = {
+  dark: [
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+      {attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',subdomains:'abcd',maxZoom:19}),
+  ],
+  osm: [
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',maxZoom:19}),
+  ],
+  satellite: [
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      {attribution:'© Esri, Maxar, GeoEye',maxZoom:18}),
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png',
+      {attribution:'',subdomains:'abcd',opacity:0.7}),
+  ],
+  topo: [
+    L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+      {attribution:'© <a href="https://opentopomap.org/">OpenTopoMap</a>',maxZoom:17}),
+  ],
+};
 
-// Dark overlay for atmosphere
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',{
-  opacity:0.75,subdomains:'abcd'
-}).addTo(map);
+// Population density overlay (Esri public service)
+const popLayer = L.tileLayer(
+  'https://tiles.arcgis.com/tiles/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Population_Density/MapServer/tile/{z}/{y}/{x}',
+  {opacity:0.6, attribution:'© Esri World Population Density'}
+);
 
-// Labels on top
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png',{
-  opacity:0.5,subdomains:'abcd'
-}).addTo(map);
+// Labels overlay (for satellite mode toggle)
+const labelsLayer = L.tileLayer(
+  'https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png',
+  {subdomains:'abcd', opacity:0.7, attribution:''}
+);
+
+// Tension heat circles
+const heatCircles = HOTSPOTS.map(h =>
+  L.circle([h.lat, h.lon], {
+    radius: h.tension * 15000,
+    color: h.color, fillColor: h.color,
+    fillOpacity: 0.07, opacity: 0.2, weight: 1, interactive: false,
+  })
+);
+
+let currentBase = 'dark';
+let popVisible = false;
+let heatVisible = false;
+let labelsVisible = true;
+
+function setBase(key){
+  // Remove all current base layers
+  Object.values(baseLayers).flat().forEach(l => { try{map.removeLayer(l);}catch(e){} });
+  baseLayers[key].forEach(l => l.addTo(map));
+  currentBase = key;
+  ['dark','osm','satellite','topo'].forEach(k =>
+    document.getElementById('btn-'+k).classList.toggle('active', k===key)
+  );
+}
+setBase('dark');
+
+document.getElementById('btn-dark').addEventListener('click',()=>setBase('dark'));
+document.getElementById('btn-osm').addEventListener('click',()=>setBase('osm'));
+document.getElementById('btn-sat').addEventListener('click',()=>setBase('satellite'));
+document.getElementById('btn-topo').addEventListener('click',()=>setBase('topo'));
+
+document.getElementById('btn-pop').addEventListener('click',()=>{
+  popVisible = !popVisible;
+  popVisible ? popLayer.addTo(map) : map.removeLayer(popLayer);
+  document.getElementById('btn-pop').classList.toggle('active', popVisible);
+});
+
+document.getElementById('btn-heat').addEventListener('click',()=>{
+  heatVisible = !heatVisible;
+  heatCircles.forEach(c => heatVisible ? c.addTo(map) : map.removeLayer(c));
+  document.getElementById('btn-heat').classList.toggle('active', heatVisible);
+});
+
+document.getElementById('btn-labels').addEventListener('click',()=>{
+  labelsVisible = !labelsVisible;
+  if(labelsVisible) { labelsLayer.addTo(map); } else { map.removeLayer(labelsLayer); }
+  document.getElementById('btn-labels').classList.toggle('active', labelsVisible);
+});
 
 L.control.zoom({position:'bottomright'}).addTo(map);
 
-// ═══════════════ MARKERS ═══════════════
-const cache = {};
-
+// ═══════════════════════════════════════════════════════════════════
+// MARKERS
+// ═══════════════════════════════════════════════════════════════════
 HOTSPOTS.forEach(h=>{
-  const ti=getTI(h.tension);
-  const sz=h.tension>=90?24:h.tension>=75?20:16;
-  const icon=L.divIcon({
+  const ti = getTI(h.tension);
+  const sz = h.tension>=90?24:h.tension>=75?20:16;
+  const icon = L.divIcon({
     className:'',
     html:`<div style="
       width:${sz}px;height:${sz}px;border-radius:50%;
       background:${h.color}18;border:2px solid ${h.color};
       box-shadow:0 0 14px ${h.color}88;cursor:pointer;
-      animation:mPulse 2s ease-in-out infinite;
+      animation:mPulse_${h.id} 2s ease-in-out infinite;
       display:flex;align-items:center;justify-content:center;
     "><div style="width:6px;height:6px;border-radius:50%;background:${h.color};"></div></div>
-    <style>@keyframes mPulse{0%,100%{box-shadow:0 0 8px ${h.color}55;}50%{box-shadow:0 0 20px ${h.color}cc,0 0 40px ${h.color}44;}}</style>`,
-    iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]
+    <style>@keyframes mPulse_${h.id}{0%,100%{box-shadow:0 0 8px ${h.color}55;}50%{box-shadow:0 0 22px ${h.color}cc,0 0 44px ${h.color}44;}}</style>`,
+    iconSize:[sz,sz], iconAnchor:[sz/2,sz/2]
   });
-  const marker=L.marker([h.lat,h.lon],{icon}).addTo(map);
-  marker.bindPopup(L.popup({closeButton:false,offset:[0,-sz/2],maxWidth:200}).setContent(`
+  const marker = L.marker([h.lat,h.lon],{icon}).addTo(map);
+  marker.bindPopup(L.popup({closeButton:false,offset:[0,-sz/2],maxWidth:210}).setContent(`
     <div class="pu-name">${h.name}</div>
     <div class="pu-lvl" style="color:${ti.c}">⬤ ${ti.l} — ${h.tension}/100</div>
     <div class="pu-region">${h.region}</div>
@@ -382,12 +767,14 @@ HOTSPOTS.forEach(h=>{
   marker.on('click',()=>marker.openPopup());
 });
 
-// ═══════════════ HOTSPOT LIST ═══════════════
-const listEl=document.getElementById('hsList');
+// ═══════════════════════════════════════════════════════════════════
+// HOTSPOT LIST
+// ═══════════════════════════════════════════════════════════════════
+const listEl = document.getElementById('hsList');
 [...HOTSPOTS].sort((a,b)=>b.tension-a.tension).forEach(h=>{
-  const ti=getTI(h.tension);
-  const el=document.createElement('div');
-  el.className='hs';el.id='li-'+h.id;
+  const ti = getTI(h.tension);
+  const el = document.createElement('div');
+  el.className='hs'; el.id='li-'+h.id;
   el.innerHTML=`<div class="hs-name">${h.name}</div>
     <div class="hs-bar"><div class="hs-fill" style="width:${h.tension}%;background:${h.color}"></div></div>
     <div class="hs-meta"><div class="hs-region">${h.region}</div><div class="hs-lvl" style="color:${ti.c}">${ti.l}</div></div>`;
@@ -395,7 +782,9 @@ const listEl=document.getElementById('hsList');
   listEl.appendChild(el);
 });
 
-// ═══════════════ TABS ═══════════════
+// ═══════════════════════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════════════════════
 document.querySelectorAll('.tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -405,112 +794,99 @@ document.querySelectorAll('.tab').forEach(tab=>{
   });
 });
 
-// ═══════════════ PANEL LOGIC ═══════════════
+// ═══════════════════════════════════════════════════════════════════
+// PANEL LOGIC
+// ═══════════════════════════════════════════════════════════════════
 function closePanel(){
   document.getElementById('detPanel').classList.remove('open');
   document.querySelectorAll('.hs').forEach(e=>e.classList.remove('active'));
 }
-document.getElementById('closeBtn').onclick=closePanel;
+document.getElementById('closeBtn').onclick = closePanel;
 
 function openHS(id){
-  const h=HOTSPOTS.find(x=>x.id===id);if(!h)return;
+  const h = HOTSPOTS.find(x=>x.id===id);
+  if(!h) return;
   document.querySelectorAll('.hs').forEach(e=>e.classList.remove('active'));
-  const li=document.getElementById('li-'+id);if(li)li.classList.add('active');
+  const li = document.getElementById('li-'+id);
+  if(li) li.classList.add('active');
   map.flyTo([h.lat,h.lon],5,{duration:1.2});
   document.getElementById('detPanel').classList.add('open');
-  document.getElementById('detRegion').textContent=h.region.toUpperCase()+' // GEOINT';
-  document.getElementById('detName').textContent=h.name;
+  document.getElementById('detRegion').textContent = h.region.toUpperCase()+' // GEOINT';
+  document.getElementById('detName').textContent = h.name;
+
   // Reset to history tab
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));
   document.querySelectorAll('.tc').forEach((c,i)=>c.classList.toggle('active',i===0));
-  if(cache[id]){renderIntel(h,cache[id]);return;}
-  document.getElementById('loadState').style.display='block';
-  document.getElementById('intelWrap').style.display='none';
-  document.getElementById('loadStep').textContent='Connecting to AI analyst...';
-  fetchIntel(h);
-}
-window.openHS=openHS;
 
-async function fetchIntel(h){
-  document.getElementById('loadStep').textContent='Querying live news sources...';
-  try{
-    const res=await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "anthropic-version":"2023-06-01",
-        "anthropic-beta":"web-search-2025-03-05",
-        "anthropic-dangerous-direct-browser-access":"true"
-      },
-      body:JSON.stringify({
-        model:"claude-sonnet-4-20250514",
-        max_tokens:2000,
-        tools:[{type:"web_search_20250305",name:"web_search"}],
-        system:"You are a senior geopolitical intelligence analyst. Use web search to find the very latest news (2025-2026) about the conflict, then synthesize everything into a comprehensive intelligence report. Return ONLY a valid JSON object — no markdown, no backticks, no preamble, just raw JSON.",
-        messages:[{role:"user",content:h.q}]
-      })
-    });
-    document.getElementById('loadStep').textContent='Processing intelligence data...';
-    if(!res.ok){const e=await res.text();throw new Error(`API ${res.status}: ${e}`);}
-    const data=await res.json();
-    const tb=data.content?.find(b=>b.type==="text");
-    if(!tb)throw new Error("No text block in response");
-    let clean=tb.text.trim().replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/\s*```$/,'').trim();
-    const intel=JSON.parse(clean);
-    cache[h.id]=intel;
-    renderIntel(h,intel);
-    document.getElementById('ftrTime').textContent='LAST INTEL: '+new Date().toUTCString();
-  }catch(e){
-    document.getElementById('loadState').innerHTML=`
-      <div style="color:#ff4444;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-align:center;padding:20px 0;">
-        ⚠ INTEL FETCH FAILED<br><br>
-        <span style="color:var(--muted);font-size:9px;line-height:1.9;">
-          ${e.message.substring(0,120)}<br><br>
-          This dashboard uses the Claude API.<br>
-          Ensure it is hosted via Anthropic's<br>
-          claude.ai artifact system or a server<br>
-          that allows CORS to api.anthropic.com
-        </span>
-      </div>`;
-  }
+  renderIntel(h);
 }
+window.openHS = openHS;
 
-function renderIntel(h,d){
-  const ti=getTI(h.tension);
-  document.getElementById('loadState').style.display='none';
-  document.getElementById('intelWrap').style.display='block';
-  // Tension
-  const tm=document.getElementById('tmeter');
-  tm.style.borderColor=h.color+'44';tm.style.background=h.color+'08';
-  document.getElementById('tmFill').style.width=h.tension+'%';
-  document.getElementById('tmFill').style.background=`linear-gradient(90deg,${h.color}88,${h.color})`;
-  document.getElementById('tmNum').textContent=h.tension;document.getElementById('tmNum').style.color=h.color;
-  document.getElementById('tmLbl').textContent=ti.l;document.getElementById('tmLbl').style.color=ti.c;
+function renderIntel(h){
+  const ti = getTI(h.tension);
+  document.getElementById('intelWrap').style.display = 'block';
+
+  // Tension meter
+  const tm = document.getElementById('tmeter');
+  tm.style.borderColor = h.color+'44';
+  tm.style.background = h.color+'08';
+  document.getElementById('tmFill').style.width = h.tension+'%';
+  document.getElementById('tmFill').style.background = `linear-gradient(90deg,${h.color}88,${h.color})`;
+  document.getElementById('tmNum').textContent = h.tension;
+  document.getElementById('tmNum').style.color = h.color;
+  document.getElementById('tmLbl').textContent = ti.l;
+  document.getElementById('tmLbl').style.color = ti.c;
+
   // Parties
-  document.getElementById('chips').innerHTML=h.parties.map(p=>`<span class="chip${p.m?' main':''}">${p.n}</span>`).join('');
+  document.getElementById('chips').innerHTML = h.parties.map(p=>
+    `<span class="chip${p.m?' main':''}">${p.n}</span>`).join('');
+
   // Outlook color
-  const oc=(d.outlook||'').includes('Escalat')?'var(--red)':(d.outlook||'').includes('De-')?'#00ff88':'var(--yellow)';
+  const oc = (h.outlook||'').includes('Escalat') ? 'var(--red)' :
+             (h.outlook||'').includes('De-') ? '#00ff88' : 'var(--yellow)';
+
+  // Open data sources section
+  const srcHtml = `<div class="src-box">
+    <div class="src-t">▸ OPEN DATA SOURCES</div>
+    <div class="src-links">
+      ${h.sources.map(s=>`<a href="${s.u}" target="_blank" rel="noopener" class="src-a">${s.l} ↗</a>`).join('')}
+    </div>
+  </div>`;
+
   // HISTORY TAB
-  document.getElementById('tc-history').innerHTML=
-    `<div class="hbox">${d.summary||''}</div>`+
-    `<div class="cb">`+(d.history||'').split('\n\n').filter(Boolean).map(p=>`<p>${p}</p>`).join('')+`</div>`;
+  document.getElementById('tc-history').innerHTML =
+    `<div class="hbox">${h.summary}</div>` +
+    h.history.split('\n\n').filter(Boolean).map(p=>`<div class="cb"><p>${p}</p></div>`).join('') +
+    srcHtml;
+
   // CURRENT TAB
-  document.getElementById('tc-current').innerHTML=
-    `<div class="outlook-row"><div class="ol-lbl">OUTLOOK:</div><div class="ol-val" style="color:${oc}">${d.outlook||'Unknown'}</div></div>`+
-    `<div class="wbox">${(d.current||'').split('\n\n')[0]||''}</div>`+
-    (d.current||'').split('\n\n').slice(1).filter(Boolean).map(p=>`<div class="cb"><p>${p}</p></div>`).join('')+
-    (d.why?`<div style="margin-top:10px"><div class="sec-t">ROOT CAUSES</div>`+d.why.split('\n\n').filter(Boolean).map(p=>`<div class="cb"><p>${p}</p></div>`).join('')+`</div>`:'');
+  document.getElementById('tc-current').innerHTML =
+    `<div class="outlook-row"><div class="ol-lbl">OUTLOOK:</div><div class="ol-val" style="color:${oc}">${h.outlook||'Unknown'}</div></div>` +
+    `<div class="wbox">${h.current.split('\n\n')[0]||''}</div>` +
+    h.current.split('\n\n').slice(1).filter(Boolean).map(p=>`<div class="cb"><p>${p}</p></div>`).join('') +
+    (h.why ? `<div style="margin-top:10px"><div class="sec-t">ROOT CAUSES</div>` +
+      h.why.split('\n\n').filter(Boolean).map(p=>`<div class="cb"><p>${p}</p></div>`).join('') + `</div>` : '');
+
   // TIMELINE TAB
-  document.getElementById('tc-timeline').innerHTML=
-    `<div class="tl">`+(d.timeline||[]).map((t,i,a)=>`
+  document.getElementById('tc-timeline').innerHTML =
+    `<div class="tl">` +
+    (h.timeline||[]).map((t,i,a)=>`
       <div class="tl-item">
         <div class="tl-date">${t.date}</div>
-        <div class="tl-col"><div class="tl-dot" style="background:${h.color}"></div>${i<a.length-1?'<div class="tl-trail"></div>':''}</div>
+        <div class="tl-col">
+          <div class="tl-dot" style="background:${h.color}"></div>
+          ${i<a.length-1?'<div class="tl-trail"></div>':''}
+        </div>
         <div class="tl-txt">${t.event}</div>
-      </div>`).join('')+`</div>`;
+      </div>`).join('') +
+    `</div>`;
+
   // FACTS TAB
-  document.getElementById('tc-facts').innerHTML=
-    (d.keyFacts||[]).map(f=>`<div class="kf"><div class="kf-icon">▸</div><div>${f}</div></div>`).join('');
+  document.getElementById('tc-facts').innerHTML =
+    (h.keyFacts||[]).map(f=>`<div class="kf"><div class="kf-icon">▸</div><div>${f}</div></div>`).join('') +
+    srcHtml;
+
+  document.getElementById('ftrTime').textContent = 'UPDATED: '+new Date().toUTCString();
 }
 </script>
 </body>
